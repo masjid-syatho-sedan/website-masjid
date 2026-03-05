@@ -1,5 +1,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="language" content="id-ID" />
+<meta http-equiv="Content-Language" content="id-ID" />
 
 <title>
     {{ filled($title ?? null) ? $title.' - '.config('app.name', 'Laravel') : config('app.name', 'Laravel') }}
