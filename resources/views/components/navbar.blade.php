@@ -7,7 +7,7 @@ $active = $active ?? 'home';
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <!-- Logo -->
-            <a href="/" class="flex-shrink-0 flex items-center gap-2 hover:opacity-80 transition">
+            <a wire:navigate href="/" class="flex-shrink-0 flex items-center gap-2 hover:opacity-80 transition">
                 <img src="{{ asset('logo.png') }}" alt="MASJID SYATHO SEDAN" class="h-10 w-auto">
                 <div class="flex flex-col">
                     <span class="text-sm font-bold text-amber-900">MASJID SYATHO</span>
@@ -17,28 +17,19 @@ $active = $active ?? 'home';
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-8">
-                <a href="/"
-                    class="text-amber-900 hover:text-amber-700 font-medium transition {{ $active === 'home' ? 'border-b-2 border-amber-700' : '' }}">
+                <a wire:navigate href="/"
+                    class="text-amber-700 hover:text-amber-600 transition font-bold text-amber-900">
                     Beranda
-                </a>
-                <a href="#tentang" class="text-amber-700 hover:text-amber-600 transition">
-                    Tentang
-                </a>
-                <a href="#fasilitas" class="text-amber-700 hover:text-amber-600 transition">
-                    Fasilitas
-                </a>
-                <a href="#kontak" class="text-amber-700 hover:text-amber-600 transition">
-                    Kontak
                 </a>
 
                 <!-- Portal -->
                 @auth
-                    <a href="{{ route('dashboard') }}" class="text-amber-700 hover:text-amber-600 transition">
-                        Portal
+                    <a wire:navigate href="{{ route('dashboard') }}" class="text-amber-700 hover:text-amber-600 transition">
+                        Portal Masjid
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="text-amber-700 hover:text-amber-600 transition">
-                        Portal
+                    <a wire:navigate href="{{ route('login') }}" class="text-amber-700 hover:text-amber-600 transition">
+                        Portal Masjid
                     </a>
                 @endauth
             </div>
@@ -56,19 +47,16 @@ $active = $active ?? 'home';
 
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden pb-4 border-t border-amber-100">
-            <a href="/" class="block px-3 py-2 text-amber-900 hover:bg-amber-50 rounded">Beranda</a>
-            <a href="#tentang" class="block px-3 py-2 text-amber-700 hover:bg-amber-50 rounded">Tentang</a>
-            <a href="#fasilitas" class="block px-3 py-2 text-amber-700 hover:bg-amber-50 rounded">Fasilitas</a>
-            <a href="#kontak" class="block px-3 py-2 text-amber-700 hover:bg-amber-50 rounded">Kontak</a>
+            <a wire:navigate href="/" class="block px-3 py-2 text-amber-900 hover:bg-amber-50 rounded">Beranda</a>
 
             {{-- Portal --}}
             @auth
-                <a href="{{ route('dashboard') }}" class="block px-3 py-2 text-amber-700 hover:bg-amber-50 rounded">
-                    Portal
+                <a wire:navigate href="{{ route('dashboard') }}" class="block px-3 py-2 text-amber-700 hover:bg-amber-50 rounded">
+                    Portal Masjid
                 </a>
             @else
-                <a href="{{ route('login') }}" class="block px-3 py-2 text-amber-700 hover:bg-amber-50 rounded">
-                    Portal
+                <a wire:navigate href="{{ route('login') }}" class="block px-3 py-2 text-amber-700 hover:bg-amber-50 rounded">
+                    Portal Masjid
                 </a>
             @endauth
         </div>
