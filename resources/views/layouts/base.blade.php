@@ -5,7 +5,7 @@
     </head>
     <body class="bg-amber-50">
 
-        <x-navbar />
+        <x-navbar :active="$active ?? null" />
 
         {{ $slot }}
 

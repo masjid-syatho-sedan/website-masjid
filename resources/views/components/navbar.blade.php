@@ -1,8 +1,3 @@
-<?php
-// @var string $active (optional) - active page name
-$active = $active ?? 'home';
-?>
-
 <nav class="sticky top-0 z-50 bg-white border-b border-amber-100 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
@@ -18,8 +13,12 @@ $active = $active ?? 'home';
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-8">
                 <a wire:navigate href="/"
-                    class="text-amber-700 hover:text-amber-600 transition font-bold text-amber-900">
+                    class="text-amber-700 hover:text-amber-600 transition font-bold {{ $active === 'home' ? 'text-amber-900' : '' }}">
                     Beranda
+                </a>
+                <a wire:navigate href="/blog"
+                    class="text-amber-700 hover:text-amber-600 transition font-bold {{ $active === 'artikel' ? 'text-amber-900' : '' }}">
+                    Artikel
                 </a>
 
                 <!-- Portal -->
