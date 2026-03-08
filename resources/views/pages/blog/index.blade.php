@@ -46,22 +46,6 @@
                         class="w-full px-6 py-3 rounded-lg border-2 border-amber-200 focus:border-amber-700 focus:outline-none transition"
                     >
                 </div>
-
-                <!-- Category Filter -->
-                <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0">
-                    <button class="px-6 py-3 rounded-lg bg-amber-700 text-white font-semibold whitespace-nowrap hover:bg-amber-800 transition">
-                        Semua
-                    </button>
-                    <button class="px-6 py-3 rounded-lg bg-amber-50 text-amber-700 font-semibold whitespace-nowrap hover:bg-amber-100 transition border-2 border-amber-200">
-                        Ibadah
-                    </button>
-                    <button class="px-6 py-3 rounded-lg bg-amber-50 text-amber-700 font-semibold whitespace-nowrap hover:bg-amber-100 transition border-2 border-amber-200">
-                        Tips & Trik
-                    </button>
-                    <button class="px-6 py-3 rounded-lg bg-amber-50 text-amber-700 font-semibold whitespace-nowrap hover:bg-amber-100 transition border-2 border-amber-200">
-                        Berita
-                    </button>
-                </div>
             </div>
         </div>
     </section>
@@ -279,27 +263,6 @@
             <div class="text-center mt-12">
                 <button class="px-10 py-3 bg-amber-700 text-white font-bold rounded-lg hover:bg-amber-800 transition shadow-lg hover:shadow-xl">
                     Muat Lebih Banyak Artikel
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="py-16 bg-gradient-to-r from-amber-700 to-amber-800">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Dapatkan Artikel Terbaru</h2>
-            <p class="text-amber-100 text-lg mb-8">
-                Berlangganan newsletter kami untuk menerima artikel inspiratif langsung ke email Anda setiap minggu
-            </p>
-            
-            <div class="flex gap-2 max-w-md mx-auto">
-                <input 
-                    type="email" 
-                    placeholder="Masukkan email Anda..." 
-                    class="flex-1 px-6 py-3 rounded-lg focus:outline-none"
-                >
-                <button class="px-8 py-3 bg-white text-amber-700 font-bold rounded-lg hover:bg-amber-50 transition">
-                    Berlangganan
                 </button>
             </div>
         </div>

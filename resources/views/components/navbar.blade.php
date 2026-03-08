@@ -46,7 +46,8 @@
 
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden pb-4 border-t border-amber-100">
-            <a wire:navigate href="/" class="block px-3 py-2 text-amber-900 hover:bg-amber-50 rounded">Beranda</a>
+            <a wire:navigate href="/" class="block px-3 py-2 text-amber-700 hover:text-amber-600 transition font-bold {{ $active === 'home' ? 'text-amber-900' : '' }}">Beranda</a>
+            <a wire:navigate href="/blog" class="block px-3 py-2 text-amber-700 hover:text-amber-600 transition font-bold {{ $active === 'artikel' ? 'text-amber-900' : '' }}">Artikel</a>
 
             {{-- Portal --}}
             @auth
