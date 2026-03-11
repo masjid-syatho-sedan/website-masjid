@@ -1,4 +1,4 @@
-<x-layouts::base title="Halaman Beranda">
+<x-layouts::base title="Halaman Beranda" active="home">
     <!-- Hero Section -->
     <section class="relative bg-gradient-to-br from-amber-700 via-amber-600 to-amber-800 overflow-hidden pt-16 pb-16 md:pt-0 md:pb-0 md:h-[600px]">
         <!-- Background Pattern -->
