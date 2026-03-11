@@ -13,6 +13,7 @@ Route::controller(App\Http\Controllers\BlogController::class)
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::redirect('dashboard', '/portal');
     Route::view('portal', 'pages.dashboard.index')->name('dashboard');
 });
 
