@@ -41,9 +41,9 @@
 
         {{-- HERO --}}
         <div
-            class="relative rounded-3xl overflow-hidden mb-8 flex items-center justify-between gap-6
-bg-gradient-to-br from-amber-900 via-amber-800 to-amber-500
-px-11 py-10 shadow-[0_8px_40px_rgba(120,53,15,0.3)]">
+            class="relative rounded-3xl overflow-hidden mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5
+ bg-gradient-to-br from-amber-900 via-amber-800 to-amber-500
+px-6 py-7 md:px-11 md:py-10 shadow-[0_8px_40px_rgba(120,53,15,0.3)]">
 
             <div class="absolute -top-[60px] -right-[60px] w-[220px] h-[220px] rounded-full bg-white/5"></div>
             <div class="absolute -bottom-[40px] left-[30%] w-[160px] h-[160px] rounded-full bg-white/5"></div>
@@ -59,19 +59,19 @@ px-11 py-10 shadow-[0_8px_40px_rgba(120,53,15,0.3)]">
                     Selamat Datang, {{ auth()->user()->name }}
                 </p>
 
-                <h1 class="font-['Playfair_Display'] text-3xl font-bold text-white leading-tight mb-2">
+                <h1 class="font-['Playfair_Display'] text-2xl md:text-3xl font-bold text-white leading-tight mb-2">
                     Masjid Syatho<br>
                     <span class="text-amber-200">Sedan Rembang</span>
                 </h1>
 
-                <p class="text-amber-100/70 text-sm max-w-[380px] leading-relaxed">
+                <p class="text-amber-100/70 text-sm max-w-full md:max-w-[380px] leading-relaxed">
                     Portal manajemen resmi Masjid Syatho. Pantau fasilitas, kegiatan, dan informasi masjid secara
                     terpusat.
                 </p>
 
             </div>
 
-            <div class="relative z-10 flex flex-col items-end gap-2">
+            <div class="relative z-10 flex flex-row flex-wrap md:flex-col md:items-end gap-2">
 
                 <div
                     class="flex items-center gap-2 px-4 py-1 rounded-full border border-white/20 bg-white/10 backdrop-blur text-amber-100 text-sm font-semibold">
@@ -88,7 +88,7 @@ px-11 py-10 shadow-[0_8px_40px_rgba(120,53,15,0.3)]">
 
 
         {{-- STATS --}}
-        <div class="grid grid-cols-4 md:grid-cols-2 gap-4 mb-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
 
             <div
                 class="flex items-center gap-4 bg-white border border-amber-200 rounded-2xl p-5 shadow-sm hover:-translate-y-1 hover:shadow-lg transition animate-fadeUp">
@@ -183,7 +183,7 @@ px-11 py-10 shadow-[0_8px_40px_rgba(120,53,15,0.3)]">
 
 
         {{-- FACILITIES --}}
-        <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
 
             <div
                 class="flex gap-4 p-4 bg-white border border-amber-100 rounded-xl hover:border-amber-400 hover:shadow-lg hover:-translate-y-1 transition animate-fadeUp">
@@ -237,7 +237,7 @@ px-11 py-10 shadow-[0_8px_40px_rgba(120,53,15,0.3)]">
 
 
         {{-- INFO --}}
-        <div class="grid grid-cols-2 md:grid-cols-1 gap-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
 
             <div class="bg-white border border-amber-200 rounded-2xl p-6 shadow-sm">
 
