@@ -107,7 +107,7 @@ new #[Layout('layouts.base', ['active' => 'artikel'])] class extends Component {
                 {{-- Konten artikel --}}
                 <div class="prose prose-amber max-w-none text-amber-900 leading-relaxed
                             prose-headings:text-amber-900 prose-a:text-amber-700 prose-strong:text-amber-900">
-                    {!! nl2br(e($artikel->konten)) !!}
+                    {!! $artikel->konten !!}
                 </div>
 
                 {{-- Tags --}}

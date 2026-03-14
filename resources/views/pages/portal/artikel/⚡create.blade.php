@@ -179,9 +179,8 @@ new #[Title('Tulis Artikel Baru')] #[Layout('layouts.portal')] class extends Com
             {{-- Konten --}}
             <div class="bg-white rounded-2xl border border-amber-100 shadow-sm p-5">
                 <label class="block text-sm font-semibold text-amber-800 mb-1.5">Konten Artikel <span class="text-red-500">*</span></label>
-                <textarea wire:model="konten" rows="18"
-                    placeholder="Tulis konten artikel di sini..."
-                    class="w-full px-4 py-3 rounded-xl border border-amber-200 focus:border-amber-500 focus:ring-1 focus:ring-amber-300 focus:outline-none text-amber-900 resize-y font-mono text-sm leading-relaxed"></textarea>
+                <input type="hidden" id="trix_konten" wire:model="konten">
+                <trix-editor input="trix_konten" class="trix-content rounded-xl border border-amber-200 focus:border-amber-500 focus:ring-1 focus:ring-amber-300" style="min-height: 400px;"></trix-editor>
                 @error('konten') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
