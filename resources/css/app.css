@@ -65,29 +65,3 @@ select:focus[data-flux-control] {
     @apply size-4;
 } */
 
-/* Trix Editor Styling */
-trix-editor {
-    @apply !border-amber-200 !outline-none;
-    @apply rounded-xl;
-}
-
-trix-editor:focus {
-    @apply !border-amber-500 !shadow-sm;
-    @apply ring-1 !ring-amber-300;
-}
-
-.trix-button-group {
-    @apply border-amber-200;
-}
-
-.trix-button {
-    @apply !text-amber-700 hover:!bg-amber-50;
-}
-
-.trix-button.active, .trix-button:active {
-    @apply !bg-amber-100 !text-amber-800;
-}
-
-.trix-content {
-    @apply text-amber-900;
-}
