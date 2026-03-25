@@ -360,7 +360,7 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                     {{-- Pagination --}}
                     @if ($this->artikels->hasPages())
                         <div class="mt-12 flex justify-center">
-                            {{ $this->artikels->links('vendor.pagination.tailwind') }}
+                            {{ $this->artikels->links() }}
                         </div>
                     @endif
                 @endif
