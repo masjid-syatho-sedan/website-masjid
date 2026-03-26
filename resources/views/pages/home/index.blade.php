@@ -258,6 +258,22 @@
         </div>
     </section>
 
+    <!-- Prayer Times Section -->
+    <section id="waktu-sholat" class="py-16 bg-gradient-to-r from-amber-50 to-yellow-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-bold text-amber-900 mb-4">Jadwal Sholat</h2>
+                <p class="text-xl text-amber-700 max-w-2xl mx-auto">
+                    Waktu sholat hari ini untuk wilayah Sedan, Kabupaten Rembang
+                </p>
+            </div>
+
+            <div class="max-w-md mx-auto">
+                <livewire:waktu-sholat />
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="py-16 bg-gradient-to-r from-amber-700 to-amber-800">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

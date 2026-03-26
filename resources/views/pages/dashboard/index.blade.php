@@ -239,33 +239,7 @@ px-6 py-7 md:px-11 md:py-10 shadow-[0_8px_40px_rgba(120,53,15,0.3)]">
         {{-- INFO --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
 
-            <div class="bg-white border border-amber-200 rounded-2xl p-6 shadow-sm">
-
-                <div class="font-['Playfair_Display'] text-sm font-bold text-amber-900 mb-4">
-                    Jadwal Sholat Hari Ini
-                </div>
-
-                <div class="space-y-2">
-
-                    <div class="flex items-center justify-between px-3 py-2 rounded-lg bg-amber-50">
-                        <span class="text-sm font-semibold text-amber-800">Subuh</span>
-                        <span class="font-['Playfair_Display'] font-bold text-amber-600">04:22</span>
-                    </div>
-
-                    <div class="flex items-center justify-between px-3 py-2 rounded-lg bg-amber-50">
-                        <span class="text-sm font-semibold text-amber-800">Dzuhur</span>
-                        <span class="font-['Playfair_Display'] font-bold text-amber-600">11:52</span>
-                    </div>
-
-                    <div
-                        class="flex items-center justify-between px-3 py-2 rounded-lg bg-amber-100 border border-amber-300">
-                        <span class="text-sm font-semibold text-amber-900">Ashar</span>
-                        <span class="font-['Playfair_Display'] font-bold text-amber-700">15:10</span>
-                    </div>
-
-                </div>
-
-            </div>
+            <livewire:waktu-sholat />
 
 
 
