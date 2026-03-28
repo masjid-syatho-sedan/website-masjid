@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Kategori;
+use App\Models\Category;
 use App\Models\Tag;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -29,14 +29,14 @@ class DatabaseSeeder extends Seeder
         ]);
         $admin->assignRole('admin');
 
-        // Seed kategori
-        Kategori::factory(9)->create();
+        // Seed categories
+        Category::factory(9)->create();
 
-        // Seed tag
+        // Seed tags
         Tag::factory(18)->create();
 
-        // Seed artikel dengan teks nyata
-        $this->call(ArtikelSeeder::class);
+        // Seed articles with real content
+        $this->call(ArticleSeeder::class);
 
         DB::commit();
     }

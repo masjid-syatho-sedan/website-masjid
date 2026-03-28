@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('artikels', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('kategori_id')->nullable()->constrained('kategoris')->nullOnDelete();
-            $table->string('judul');
+            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->string('title');
             $table->string('slug')->unique();
-            $table->text('ringkasan')->nullable();
-            $table->longText('konten');
-            $table->string('gambar')->nullable();
-            $table->enum('status', ['draft', 'diterbitkan', 'diarsipkan'])->default('draft');
-            $table->boolean('unggulan')->default(false);
-            $table->unsignedBigInteger('dilihat')->default(0);
-            $table->timestamp('diterbitkan_pada')->nullable();
+            $table->text('excerpt')->nullable();
+            $table->longText('content');
+            $table->string('image')->nullable();
+            $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
+            $table->boolean('featured')->default(false);
+            $table->unsignedBigInteger('views')->default(0);
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('artikels');
+        Schema::dropIfExists('articles');
     }
 };

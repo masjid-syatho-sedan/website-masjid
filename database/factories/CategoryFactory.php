@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Kategori>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
-class KategoriFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,21 +17,21 @@ class KategoriFactory extends Factory
      */
     public function definition(): array
     {
-        $nama = fake()->unique()->randomElement([
+        $name = fake()->unique()->randomElement([
             'Ibadah', 'Kajian Islam', 'Berita Masjid', 'Tips & Trik',
             'Kegiatan', 'Sosial', 'Pendidikan', 'Ramadan', 'Zakat & Infaq',
         ]);
 
-        $warna = fake()->randomElement([
+        $color = fake()->randomElement([
             '#b45309', '#1e7e34', '#1d4ed8', '#7c3aed',
             '#dc2626', '#0891b2', '#d97706',
         ]);
 
         return [
-            'nama' => $nama,
-            'slug' => Str::slug($nama),
-            'deskripsi' => fake()->sentence(),
-            'warna' => $warna,
+            'name' => $name,
+            'slug' => Str::slug($name),
+            'description' => fake()->sentence(),
+            'color' => $color,
         ];
     }
 }

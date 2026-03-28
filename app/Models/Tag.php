@@ -12,12 +12,12 @@ class Tag extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
+        'name',
         'slug',
     ];
 
-    public function artikels(): BelongsToMany
+    public function articles(): BelongsToMany
     {
-        return $this->belongsToMany(Artikel::class, 'artikel_tag');
+        return $this->belongsToMany(Article::class, 'article_tag');
     }
 }

@@ -2,28 +2,28 @@
 
 namespace Database\Seeders;
 
-use App\Models\Artikel;
-use App\Models\Kategori;
+use App\Models\Article;
+use App\Models\Category;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-class ArtikelSeeder extends Seeder
+class ArticleSeeder extends Seeder
 {
     public function run(): void
     {
         $admin = User::where('email', 'test@example.com')->first();
 
-        $kategori = Kategori::all()->keyBy('nama');
-        $tag = Tag::all()->keyBy('nama');
+        $categories = Category::all()->keyBy('name');
+        $tags = Tag::all()->keyBy('name');
 
-        $artikelData = [
-            // ── UNGGULAN ─────────────────────────────────────────────────────
+        $articleData = [
+            // ── FEATURED ─────────────────────────────────────────────────────
             [
-                'judul' => 'Keutamaan Shalat Berjamaah di Masjid',
-                'ringkasan' => 'Shalat berjamaah di masjid memiliki keutamaan yang jauh lebih besar dibandingkan shalat sendirian. Rasulullah ﷺ sangat menganjurkan kaum muslimin untuk memakmurkan masjid dengan shalat berjamaah.',
-                'konten' => '<p>Shalat berjamaah merupakan salah satu amalan yang sangat dianjurkan dalam Islam. Rasulullah ﷺ bersabda, <em>"Shalat berjamaah lebih utama dua puluh tujuh derajat daripada shalat sendirian."</em> (HR. Bukhari &amp; Muslim)</p>
+                'title' => 'Keutamaan Shalat Berjamaah di Masjid',
+                'excerpt' => 'Shalat berjamaah di masjid memiliki keutamaan yang jauh lebih besar dibandingkan shalat sendirian. Rasulullah ﷺ sangat menganjurkan kaum muslimin untuk memakmurkan masjid dengan shalat berjamaah.',
+                'content' => '<p>Shalat berjamaah merupakan salah satu amalan yang sangat dianjurkan dalam Islam. Rasulullah ﷺ bersabda, <em>"Shalat berjamaah lebih utama dua puluh tujuh derajat daripada shalat sendirian."</em> (HR. Bukhari &amp; Muslim)</p>
 
 <h2>Keutamaan Shalat Berjamaah</h2>
 
@@ -52,18 +52,18 @@ class ArtikelSeeder extends Seeder
 </ol>
 
 <p>Masjid Syatho Sedan membuka pintu selebar-lebarnya bagi seluruh jamaah untuk memakmurkan setiap waktu shalat. Mari bersama-sama kita hidupkan masjid dengan shalat berjamaah.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => true,
-                'dilihat' => 312,
-                'diterbitkan_pada' => now()->subDays(10),
-                'kategori' => 'Ibadah',
+                'status' => 'published',
+                'featured' => true,
+                'views' => 312,
+                'published_at' => now()->subDays(10),
+                'category' => 'Ibadah',
                 'tags' => ['shalat', 'kajian'],
             ],
 
             [
-                'judul' => 'Keutamaan Bulan Ramadan dan Amalan yang Dianjurkan',
-                'ringkasan' => 'Bulan Ramadan adalah bulan penuh berkah yang dinantikan setiap muslim. Di dalamnya terdapat malam Lailatul Qadar yang lebih baik dari seribu bulan. Manfaatkan sebaik-baiknya dengan amal ibadah yang sungguh-sungguh.',
-                'konten' => '<p>Bulan Ramadan adalah bulan yang paling mulia dalam kalender Islam. Allah ﷻ berfirman, <em>"Bulan Ramadan adalah bulan yang di dalamnya diturunkan Al-Qur\'an sebagai petunjuk bagi manusia dan penjelasan-penjelasan mengenai petunjuk itu dan pembeda (antara yang hak dan yang batil)."</em> (QS. Al-Baqarah: 185)</p>
+                'title' => 'Keutamaan Bulan Ramadan dan Amalan yang Dianjurkan',
+                'excerpt' => 'Bulan Ramadan adalah bulan penuh berkah yang dinantikan setiap muslim. Di dalamnya terdapat malam Lailatul Qadar yang lebih baik dari seribu bulan. Manfaatkan sebaik-baiknya dengan amal ibadah yang sungguh-sungguh.',
+                'content' => '<p>Bulan Ramadan adalah bulan yang paling mulia dalam kalender Islam. Allah ﷻ berfirman, <em>"Bulan Ramadan adalah bulan yang di dalamnya diturunkan Al-Qur\'an sebagai petunjuk bagi manusia dan penjelasan-penjelasan mengenai petunjuk itu dan pembeda (antara yang hak dan yang batil)."</em> (QS. Al-Baqarah: 185)</p>
 
 <h2>Keistimewaan Bulan Ramadan</h2>
 
@@ -94,18 +94,18 @@ class ArtikelSeeder extends Seeder
 <p>Berdiam diri di masjid dengan niat ibadah, terutama pada sepuluh hari terakhir Ramadan untuk mencari Lailatul Qadar.</p>
 
 <p>Semoga Allah ﷻ mempertemukan kita dengan bulan Ramadan dan memberikan kekuatan untuk mengisinya dengan amal terbaik. Aamiin.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => true,
-                'dilihat' => 508,
-                'diterbitkan_pada' => now()->subDays(5),
-                'kategori' => 'Ramadan',
+                'status' => 'published',
+                'featured' => true,
+                'views' => 508,
+                'published_at' => now()->subDays(5),
+                'category' => 'Ramadan',
                 'tags' => ['ramadan', 'puasa', 'quran'],
             ],
 
             [
-                'judul' => 'Memakmurkan Masjid: Tanggung Jawab Setiap Muslim',
-                'ringkasan' => 'Masjid bukan sekadar tempat shalat, melainkan pusat peradaban Islam. Memakmurkannya adalah kewajiban setiap muslim yang beriman kepada Allah dan Hari Akhir.',
-                'konten' => '<p>Allah ﷻ berfirman, <em>"Sesungguhnya yang memakmurkan masjid-masjid Allah hanyalah orang-orang yang beriman kepada Allah dan Hari Akhir, mendirikan shalat, menunaikan zakat, dan tidak takut kecuali kepada Allah."</em> (QS. At-Taubah: 18)</p>
+                'title' => 'Memakmurkan Masjid: Tanggung Jawab Setiap Muslim',
+                'excerpt' => 'Masjid bukan sekadar tempat shalat, melainkan pusat peradaban Islam. Memakmurkannya adalah kewajiban setiap muslim yang beriman kepada Allah dan Hari Akhir.',
+                'content' => '<p>Allah ﷻ berfirman, <em>"Sesungguhnya yang memakmurkan masjid-masjid Allah hanyalah orang-orang yang beriman kepada Allah dan Hari Akhir, mendirikan shalat, menunaikan zakat, dan tidak takut kecuali kepada Allah."</em> (QS. At-Taubah: 18)</p>
 
 <h2>Apa Artinya Memakmurkan Masjid?</h2>
 
@@ -143,19 +143,19 @@ class ArtikelSeeder extends Seeder
 </ol>
 
 <p>Kami mengundang seluruh warga untuk aktif berkontribusi dalam memakmurkan Masjid Syatho Sedan. Setiap amal kebaikan, sekecil apapun, akan dicatat oleh Allah ﷻ.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => true,
-                'dilihat' => 247,
-                'diterbitkan_pada' => now()->subDays(15),
-                'kategori' => 'Berita Masjid',
+                'status' => 'published',
+                'featured' => true,
+                'views' => 247,
+                'published_at' => now()->subDays(15),
+                'category' => 'Berita Masjid',
                 'tags' => ['dakwah', 'kajian'],
             ],
 
-            // ── ARTIKEL BIASA ─────────────────────────────────────────────────
+            // ── REGULAR ARTICLES ─────────────────────────────────────────────
             [
-                'judul' => 'Adab dan Keutamaan Membaca Al-Qur\'an',
-                'ringkasan' => 'Al-Qur\'an adalah kalamullah yang mulia. Membacanya dengan adab yang benar akan mendatangkan ketenangan hati dan pahala yang berlipat ganda.',
-                'konten' => '<p>Al-Qur\'an adalah firman Allah ﷻ yang diturunkan kepada Nabi Muhammad ﷺ melalui perantara Malaikat Jibril. Membaca Al-Qur\'an adalah ibadah yang paling agung dan mendatangkan ketenangan jiwa yang luar biasa.</p>
+                'title' => 'Adab dan Keutamaan Membaca Al-Qur\'an',
+                'excerpt' => 'Al-Qur\'an adalah kalamullah yang mulia. Membacanya dengan adab yang benar akan mendatangkan ketenangan hati dan pahala yang berlipat ganda.',
+                'content' => '<p>Al-Qur\'an adalah firman Allah ﷻ yang diturunkan kepada Nabi Muhammad ﷺ melalui perantara Malaikat Jibril. Membaca Al-Qur\'an adalah ibadah yang paling agung dan mendatangkan ketenangan jiwa yang luar biasa.</p>
 
 <p>Rasulullah ﷺ bersabda, <em>"Bacalah Al-Qur\'an, karena sesungguhnya ia akan menjadi syafaat bagi para pembacanya di hari kiamat."</em> (HR. Muslim)</p>
 
@@ -182,18 +182,18 @@ class ArtikelSeeder extends Seeder
 <p>Setiap huruf yang dibaca dari Al-Qur\'an bernilai sepuluh kebaikan. Rasulullah ﷺ bersabda, <em>"Aku tidak mengatakan \'Alif Lam Mim\' itu satu huruf, tetapi Alif satu huruf, Lam satu huruf, dan Mim satu huruf."</em> (HR. Tirmidzi)</p>
 
 <p>Bayangkan betapa besar pahala yang terkumpul saat kita membaca satu halaman, satu juz, bahkan khatam Al-Qur\'an. Semoga Allah ﷻ menjadikan kita termasuk golongan Ahlul Qur\'an yang senantiasa dekat dengan Al-Qur\'an.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => false,
-                'dilihat' => 189,
-                'diterbitkan_pada' => now()->subDays(20),
-                'kategori' => 'Kajian Islam',
+                'status' => 'published',
+                'featured' => false,
+                'views' => 189,
+                'published_at' => now()->subDays(20),
+                'category' => 'Kajian Islam',
                 'tags' => ['quran', 'kajian'],
             ],
 
             [
-                'judul' => 'Panduan Lengkap Zakat Fitrah: Ketentuan dan Cara Membayar',
-                'ringkasan' => 'Zakat fitrah wajib ditunaikan setiap muslim menjelang Idul Fitri. Ketahui ketentuan, besaran, dan waktu yang tepat untuk membayarnya agar zakat Anda diterima Allah.',
-                'konten' => '<p>Zakat fitrah adalah zakat yang wajib ditunaikan oleh setiap muslim yang mampu pada bulan Ramadan hingga sebelum shalat Idul Fitri. Hukumnya <strong>fardhu \'ain</strong> bagi setiap muslim, termasuk bayi yang baru lahir dan orang tua yang sudah sepuh.</p>
+                'title' => 'Panduan Lengkap Zakat Fitrah: Ketentuan dan Cara Membayar',
+                'excerpt' => 'Zakat fitrah wajib ditunaikan setiap muslim menjelang Idul Fitri. Ketahui ketentuan, besaran, dan waktu yang tepat untuk membayarnya agar zakat Anda diterima Allah.',
+                'content' => '<p>Zakat fitrah adalah zakat yang wajib ditunaikan oleh setiap muslim yang mampu pada bulan Ramadan hingga sebelum shalat Idul Fitri. Hukumnya <strong>fardhu \'ain</strong> bagi setiap muslim, termasuk bayi yang baru lahir dan orang tua yang sudah sepuh.</p>
 
 <h2>Dasar Hukum Zakat Fitrah</h2>
 
@@ -227,18 +227,18 @@ class ArtikelSeeder extends Seeder
 </ul>
 
 <p>Zakat yang terkumpul akan disalurkan kepada delapan golongan yang berhak menerima zakat (<em>asnaf</em>), dengan prioritas fakir miskin di sekitar wilayah Sedan.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => false,
-                'dilihat' => 275,
-                'diterbitkan_pada' => now()->subDays(25),
-                'kategori' => 'Zakat & Infaq',
+                'status' => 'published',
+                'featured' => false,
+                'views' => 275,
+                'published_at' => now()->subDays(25),
+                'category' => 'Zakat & Infaq',
                 'tags' => ['zakat', 'ramadan'],
             ],
 
             [
-                'judul' => 'Hikmah di Balik Ibadah Puasa Ramadan',
-                'ringkasan' => 'Puasa bukan sekadar menahan lapar dan dahaga. Di balik ibadah ini tersimpan hikmah yang luar biasa bagi kesehatan jiwa, raga, dan kehidupan sosial umat Islam.',
-                'konten' => '<p>Puasa Ramadan adalah salah satu rukun Islam yang wajib dilaksanakan oleh setiap muslim yang baligh, berakal, sehat, dan mukim. Namun puasa bukan sekadar ritual tahunan — ia adalah madrasah (sekolah) jiwa yang mendidik kita menjadi insan yang lebih baik.</p>
+                'title' => 'Hikmah di Balik Ibadah Puasa Ramadan',
+                'excerpt' => 'Puasa bukan sekadar menahan lapar dan dahaga. Di balik ibadah ini tersimpan hikmah yang luar biasa bagi kesehatan jiwa, raga, dan kehidupan sosial umat Islam.',
+                'content' => '<p>Puasa Ramadan adalah salah satu rukun Islam yang wajib dilaksanakan oleh setiap muslim yang baligh, berakal, sehat, dan mukim. Namun puasa bukan sekadar ritual tahunan — ia adalah madrasah (sekolah) jiwa yang mendidik kita menjadi insan yang lebih baik.</p>
 
 <h2>Hikmah Spiritual Puasa</h2>
 
@@ -273,18 +273,18 @@ class ArtikelSeeder extends Seeder
 <p>Rasulullah ﷺ memperingatkan, <em>"Betapa banyak orang yang berpuasa namun tidak mendapat apa-apa dari puasanya kecuali lapar dan dahaga."</em> (HR. Ibnu Majah)</p>
 
 <p>Jagalah puasa dari hal-hal yang merusak kualitasnya: berbohong, menggosip, marah-marah, dan membuang waktu untuk hal yang tidak bermanfaat.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => false,
-                'dilihat' => 163,
-                'diterbitkan_pada' => now()->subDays(30),
-                'kategori' => 'Ibadah',
+                'status' => 'published',
+                'featured' => false,
+                'views' => 163,
+                'published_at' => now()->subDays(30),
+                'category' => 'Ibadah',
                 'tags' => ['puasa', 'ramadan', 'kajian'],
             ],
 
             [
-                'judul' => 'Pentingnya Pendidikan Agama Islam Sejak Dini',
-                'ringkasan' => 'Investasi terbaik bagi anak adalah pendidikan agama yang kuat. Generasi yang bertakwa adalah warisan paling berharga yang bisa kita tinggalkan untuk masa depan.',
-                'konten' => '<p>Rasulullah ﷺ bersabda, <em>"Setiap anak dilahirkan dalam keadaan fitrah. Maka kedua orang tuanyalah yang menjadikannya Yahudi, Nasrani, atau Majusi."</em> (HR. Bukhari &amp; Muslim)</p>
+                'title' => 'Pentingnya Pendidikan Agama Islam Sejak Dini',
+                'excerpt' => 'Investasi terbaik bagi anak adalah pendidikan agama yang kuat. Generasi yang bertakwa adalah warisan paling berharga yang bisa kita tinggalkan untuk masa depan.',
+                'content' => '<p>Rasulullah ﷺ bersabda, <em>"Setiap anak dilahirkan dalam keadaan fitrah. Maka kedua orang tuanyalah yang menjadikannya Yahudi, Nasrani, atau Majusi."</em> (HR. Bukhari &amp; Muslim)</p>
 
 <p>Hadits ini menegaskan betapa besar pengaruh lingkungan dan pendidikan terhadap perkembangan agama seorang anak. Orang tua adalah madrasah pertama dan utama bagi buah hati mereka.</p>
 
@@ -320,18 +320,18 @@ class ArtikelSeeder extends Seeder
 </ul>
 
 <p>Daftarkan putra-putri Anda di TPQ Masjid Syatho Sedan. Hubungi pengurus masjid untuk informasi lebih lanjut. Investasi terbaik untuk anak adalah pendidikan agama yang kokoh.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => false,
-                'dilihat' => 134,
-                'diterbitkan_pada' => now()->subDays(40),
-                'kategori' => 'Pendidikan',
+                'status' => 'published',
+                'featured' => false,
+                'views' => 134,
+                'published_at' => now()->subDays(40),
+                'category' => 'Pendidikan',
                 'tags' => ['dakwah', 'kajian'],
             ],
 
             [
-                'judul' => 'Kegiatan Bakti Sosial Masjid Syatho Sedan',
-                'ringkasan' => 'Masjid Syatho Sedan baru-baru ini menggelar kegiatan bakti sosial berupa santunan anak yatim dan pembagian sembako kepada warga kurang mampu di sekitar kelurahan Sedan.',
-                'konten' => '<p>Alhamdulillah, pada bulan ini Masjid Syatho Sedan kembali menyelenggarakan kegiatan bakti sosial yang melibatkan partisipasi aktif jamaah dan warga sekitar. Kegiatan ini merupakan wujud nyata dari semangat gotong royong dan kepedulian sosial yang senantiasa kami jaga.</p>
+                'title' => 'Kegiatan Bakti Sosial Masjid Syatho Sedan',
+                'excerpt' => 'Masjid Syatho Sedan baru-baru ini menggelar kegiatan bakti sosial berupa santunan anak yatim dan pembagian sembako kepada warga kurang mampu di sekitar kelurahan Sedan.',
+                'content' => '<p>Alhamdulillah, pada bulan ini Masjid Syatho Sedan kembali menyelenggarakan kegiatan bakti sosial yang melibatkan partisipasi aktif jamaah dan warga sekitar. Kegiatan ini merupakan wujud nyata dari semangat gotong royong dan kepedulian sosial yang senantiasa kami jaga.</p>
 
 <h2>Rangkaian Kegiatan</h2>
 
@@ -355,18 +355,18 @@ class ArtikelSeeder extends Seeder
 </ul>
 
 <p>Semoga amal kebaikan kita semua diterima oleh Allah ﷻ dan menjadi investasi pahala yang terus mengalir. Kegiatan serupa akan terus kami adakan secara rutin. Bagi yang ingin berpartisipasi sebagai donatur atau relawan, silakan hubungi pengurus masjid.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => false,
-                'dilihat' => 221,
-                'diterbitkan_pada' => now()->subDays(8),
-                'kategori' => 'Sosial',
+                'status' => 'published',
+                'featured' => false,
+                'views' => 221,
+                'published_at' => now()->subDays(8),
+                'category' => 'Sosial',
                 'tags' => ['sedekah', 'dakwah'],
             ],
 
             [
-                'judul' => 'Tata Cara Shalat Jumat yang Benar Sesuai Sunnah',
-                'ringkasan' => 'Shalat Jumat adalah kewajiban setiap muslim laki-laki yang merdeka, baligh, berakal, dan mukim. Ketahui tata cara pelaksanaannya yang benar sesuai tuntunan Rasulullah.',
-                'konten' => '<p>Shalat Jumat adalah ibadah mingguan yang memiliki kedudukan sangat istimewa dalam Islam. Allah ﷻ bahkan mengabadikan satu surah dalam Al-Qur\'an dengan nama "Al-Jumu\'ah" dan secara khusus memerintahkan kaum beriman untuk segera menuju masjid ketika azan Jumat dikumandangkan.</p>
+                'title' => 'Tata Cara Shalat Jumat yang Benar Sesuai Sunnah',
+                'excerpt' => 'Shalat Jumat adalah kewajiban setiap muslim laki-laki yang merdeka, baligh, berakal, dan mukim. Ketahui tata cara pelaksanaannya yang benar sesuai tuntunan Rasulullah.',
+                'content' => '<p>Shalat Jumat adalah ibadah mingguan yang memiliki kedudukan sangat istimewa dalam Islam. Allah ﷻ bahkan mengabadikan satu surah dalam Al-Qur\'an dengan nama "Al-Jumu\'ah" dan secara khusus memerintahkan kaum beriman untuk segera menuju masjid ketika azan Jumat dikumandangkan.</p>
 
 <h2>Hukum Shalat Jumat</h2>
 
@@ -402,69 +402,59 @@ class ArtikelSeeder extends Seeder
 </ul>
 
 <p>Masjid Syatho Sedan menyelenggarakan shalat Jumat dengan khutbah dua bahasa (Arab dan Indonesia) agar seluruh jamaah dapat memahami dan mengambil manfaat dari nasihat yang disampaikan.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => false,
-                'dilihat' => 198,
-                'diterbitkan_pada' => now()->subDays(35),
-                'kategori' => 'Ibadah',
+                'status' => 'published',
+                'featured' => false,
+                'views' => 198,
+                'published_at' => now()->subDays(35),
+                'category' => 'Ibadah',
                 'tags' => ['shalat', 'fiqih'],
             ],
 
             [
-                'judul' => 'Keutamaan dan Tata Cara Bersedekah dalam Islam',
-                'ringkasan' => 'Sedekah adalah salah satu amalan terbaik dalam Islam yang tidak hanya mendatangkan pahala akhirat, tetapi juga keberkahan di dunia. Tidak ada sedekah yang mengurangi harta.',
-                'konten' => '<p>Sedekah adalah pemberian sukarela kepada orang lain semata-mata karena mengharap ridha Allah ﷻ. Berbeda dengan zakat yang memiliki ketentuan nisab dan haul, sedekah dapat diberikan kapan saja, berapa saja, dan dalam bentuk apa saja.</p>
+                'title' => 'Keutamaan dan Tata Cara Bersedekah dalam Islam',
+                'excerpt' => 'Sedekah adalah salah satu amalan terbaik dalam Islam yang tidak hanya mendatangkan pahala akhirat, tetapi juga keberkahan di dunia. Tidak ada sedekah yang mengurangi harta.',
+                'content' => '<p>Sedekah adalah pemberian sukarela kepada orang lain semata-mata karena mengharap ridha Allah ﷻ. Berbeda dengan zakat yang memiliki ketentuan nisab dan haul, sedekah dapat diberikan kapan saja, berapa saja, dan dalam bentuk apa saja.</p>
 
 <h2>Keutamaan Sedekah dalam Al-Qur\'an dan Hadits</h2>
 
-<p>Allah ﷻ berfirman, <em>"Perumpamaan orang yang menginfakkan hartanya di jalan Allah seperti sebutir biji yang menumbuhkan tujuh tangkai; pada setiap tangkai ada seratus biji. Allah melipatgandakan bagi siapa yang Dia kehendaki."</em> (QS. Al-Baqarah: 261)</p>
+<p>Allah ﷻ berfirman, <em>"Perumpamaan orang-orang yang menginfakkan hartanya di jalan Allah seperti sebutir biji yang menumbuhkan tujuh tangkai, pada setiap tangkai ada seratus biji. Allah melipatgandakan bagi siapa yang Dia kehendaki."</em> (QS. Al-Baqarah: 261)</p>
 
-<p>Rasulullah ﷺ juga bersabda, <em>"Sedekah tidak mengurangi harta. Tidaklah Allah menambah bagi seorang hamba yang pemaaf kecuali kemuliaan. Dan tidaklah seseorang merendahkan diri karena Allah kecuali Allah mengangkat derajatnya."</em> (HR. Muslim)</p>
+<p>Rasulullah ﷺ bersabda, <em>"Sedekah tidak mengurangi harta."</em> (HR. Muslim). Sebaliknya, sedekah mendatangkan keberkahan dan pertambahan rezeki yang tidak terduga.</p>
 
-<h2>Bentuk-Bentuk Sedekah</h2>
-
-<p>Sedekah tidak terbatas pada uang atau barang. Rasulullah ﷺ menjelaskan bahwa sedekah mencakup:</p>
+<h2>Jenis-Jenis Sedekah</h2>
 
 <ul>
-<li>Memberikan uang atau barang kepada yang membutuhkan</li>
-<li>Senyuman kepada sesama muslim</li>
-<li>Membuang duri atau benda berbahaya dari jalan</li>
-<li>Mengucapkan kalimat yang baik</li>
-<li>Membantu seseorang yang memerlukan bantuan</li>
-<li>Ilmu yang bermanfaat yang diajarkan kepada orang lain</li>
+<li><strong>Sedekah harta</strong> — memberikan uang, makanan, pakaian, atau barang lainnya</li>
+<li><strong>Sedekah tenaga</strong> — membantu orang lain dengan tenaga dan kemampuan</li>
+<li><strong>Sedekah ilmu</strong> — mengajarkan ilmu yang bermanfaat</li>
+<li><strong>Sedekah senyum</strong> — Rasulullah ﷺ bersabda bahwa senyum kepada saudara adalah sedekah</li>
+<li><strong>Sedekah jariyah</strong> — sedekah yang pahalanya terus mengalir seperti membangun masjid atau sumur</li>
 </ul>
 
-<h2>Sedekah Jariyah</h2>
-
-<p>Sedekah yang paling utama adalah <strong>sedekah jariyah</strong> — sedekah yang pahalanya terus mengalir meskipun kita telah meninggal dunia. Rasulullah ﷺ menyebutkan tiga amalan yang tidak terputus pahalanya setelah seseorang meninggal: <em>sedekah jariyah, ilmu yang bermanfaat, dan anak shaleh yang mendoakan orang tuanya.</em> (HR. Muslim)</p>
-
-<p>Contoh sedekah jariyah: membangun masjid, sumur air, sekolah, mewakafkan tanah, atau mencetak Al-Qur\'an.</p>
-
-<h2>Cara Bersedekah Melalui Masjid Syatho Sedan</h2>
-
-<p>Masjid Syatho Sedan menyediakan kotak amal yang tersebar di beberapa titik masjid. Sedekah Anda akan disalurkan untuk:</p>
+<h2>Cara Bersedekah yang Benar</h2>
 
 <ol>
-<li>Operasional masjid (listrik, air, kebersihan)</li>
-<li>Kegiatan sosial dan santunan</li>
-<li>Program pendidikan TPQ</li>
-<li>Pembangunan dan renovasi fasilitas masjid</li>
+<li>Niatkan ikhlas semata-mata karena Allah, bukan untuk pujian atau pamer</li>
+<li>Berikan yang terbaik, bukan yang sudah tidak terpakai</li>
+<li>Utamakan orang-orang terdekat: keluarga, tetangga, lingkungan sekitar</li>
+<li>Jangan mengungkit sedekah yang telah diberikan</li>
+<li>Bersedekah dalam keadaan lapang maupun sempit</li>
 </ol>
 
-<p>Tidak ada sedekah yang terlalu kecil di hadapan Allah ﷻ. Bahkan setengah biji kurma pun jika diberikan dengan ikhlas, Allah akan menerimanya dengan tangan kanan-Nya.</p>',
-                'status' => 'diterbitkan',
-                'unggulan' => false,
-                'dilihat' => 156,
-                'diterbitkan_pada' => now()->subDays(45),
-                'kategori' => 'Zakat & Infaq',
+<p>Masjid Syatho Sedan membuka kotak amal dan program sedekah jariyah untuk pembangunan dan operasional masjid. Mari bersama-sama kita investasikan harta kita untuk kebaikan yang abadi.</p>',
+                'status' => 'published',
+                'featured' => false,
+                'views' => 156,
+                'published_at' => now()->subDays(45),
+                'category' => 'Kajian Islam',
                 'tags' => ['sedekah', 'kajian'],
             ],
 
-            // ── DRAFT ─────────────────────────────────────────────────────────
+            // ── DRAFTS ─────────────────────────────────────────────────────────
             [
-                'judul' => 'Tips Mencapai Kekhusyukan dalam Shalat',
-                'ringkasan' => 'Kekhusyukan adalah ruh dari shalat. Tanpa kekhusyukan, shalat hanyalah gerakan fisik tanpa makna. Berikut tips praktis agar kita bisa lebih khusyuk dalam shalat.',
-                'konten' => '<p>Khusyuk dalam shalat adalah impian setiap muslim. Allah ﷻ memuji orang-orang yang khusyuk dalam shalatnya: <em>"Sesungguhnya beruntunglah orang-orang yang beriman, yaitu orang-orang yang khusyuk dalam shalatnya."</em> (QS. Al-Mu\'minun: 1-2)</p>
+                'title' => 'Tips Mencapai Kekhusyukan dalam Shalat',
+                'excerpt' => 'Kekhusyukan adalah ruh dari shalat. Tanpa kekhusyukan, shalat hanyalah gerakan fisik tanpa makna. Berikut tips praktis agar kita bisa lebih khusyuk dalam shalat.',
+                'content' => '<p>Khusyuk dalam shalat adalah impian setiap muslim. Allah ﷻ memuji orang-orang yang khusyuk dalam shalatnya: <em>"Sesungguhnya beruntunglah orang-orang yang beriman, yaitu orang-orang yang khusyuk dalam shalatnya."</em> (QS. Al-Mu\'minun: 1-2)</p>
 
 <h2>Mengapa Kekhusyukan Sulit Dicapai?</h2>
 
@@ -482,17 +472,17 @@ class ArtikelSeeder extends Seeder
 
 <p>[Artikel ini masih dalam proses penyelesaian]</p>',
                 'status' => 'draft',
-                'unggulan' => false,
-                'dilihat' => 0,
-                'diterbitkan_pada' => null,
-                'kategori' => 'Ibadah',
+                'featured' => false,
+                'views' => 0,
+                'published_at' => null,
+                'category' => 'Ibadah',
                 'tags' => ['shalat', 'kajian'],
             ],
 
             [
-                'judul' => 'Mengenal Lebih Dekat Aqidah Islam: Rukun Iman',
-                'ringkasan' => 'Aqidah adalah fondasi keislaman seorang muslim. Rukun iman yang enam merupakan hal-hal yang wajib diyakini sepenuh hati oleh setiap muslim.',
-                'konten' => '<p>Aqidah secara bahasa berarti ikatan atau keyakinan yang kuat. Secara istilah, aqidah Islam adalah perkara-perkara yang wajib diyakini oleh setiap muslim dengan yakin tanpa keraguan sedikitpun.</p>
+                'title' => 'Mengenal Lebih Dekat Aqidah Islam: Rukun Iman',
+                'excerpt' => 'Aqidah adalah fondasi keislaman seorang muslim. Rukun iman yang enam merupakan hal-hal yang wajib diyakini sepenuh hati oleh setiap muslim.',
+                'content' => '<p>Aqidah secara bahasa berarti ikatan atau keyakinan yang kuat. Secara istilah, aqidah Islam adalah perkara-perkara yang wajib diyakini oleh setiap muslim dengan yakin tanpa keraguan sedikitpun.</p>
 
 <h2>Enam Rukun Iman</h2>
 
@@ -509,29 +499,29 @@ class ArtikelSeeder extends Seeder
 
 <p>[Artikel ini masih dalam proses penulisan. Akan dilengkapi segera.]</p>',
                 'status' => 'draft',
-                'unggulan' => false,
-                'dilihat' => 0,
-                'diterbitkan_pada' => null,
-                'kategori' => 'Kajian Islam',
+                'featured' => false,
+                'views' => 0,
+                'published_at' => null,
+                'category' => 'Kajian Islam',
                 'tags' => ['akidah', 'kajian'],
             ],
         ];
 
-        foreach ($artikelData as $data) {
-            $kategoriNama = $data['kategori'];
-            $tagNama = $data['tags'];
+        foreach ($articleData as $data) {
+            $categoryName = $data['category'];
+            $tagNames = $data['tags'];
 
-            unset($data['kategori'], $data['tags']);
+            unset($data['category'], $data['tags']);
 
-            $kategoriModel = $kategori->get($kategoriNama);
-            $data['kategori_id'] = $kategoriModel?->id;
+            $categoryModel = $categories->get($categoryName);
+            $data['category_id'] = $categoryModel?->id;
             $data['user_id'] = $admin->id;
-            $data['slug'] = Str::slug($data['judul']);
+            $data['slug'] = Str::slug($data['title']);
 
-            $artikel = Artikel::create($data);
+            $article = Article::create($data);
 
-            $tagIds = $tag->only($tagNama)->pluck('id');
-            $artikel->tags()->attach($tagIds);
+            $tagIds = $tags->only($tagNames)->pluck('id');
+            $article->tags()->attach($tagIds);
         }
     }
 }

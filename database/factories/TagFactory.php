@@ -17,15 +17,15 @@ class TagFactory extends Factory
      */
     public function definition(): array
     {
-        $nama = fake()->unique()->randomElement([
+        $name = fake()->unique()->randomElement([
             'shalat', 'quran', 'hadits', 'dakwah', 'ramadan', 'zakat',
             'puasa', 'haji', 'umrah', 'sedekah', 'doa', 'dzikir',
             'kajian', 'fiqih', 'akidah', 'tasawuf', 'sirah', 'tafsir',
         ]);
 
         return [
-            'nama' => $nama,
-            'slug' => Str::slug($nama),
+            'name' => $name,
+            'slug' => Str::slug($name),
         ];
     }
 }

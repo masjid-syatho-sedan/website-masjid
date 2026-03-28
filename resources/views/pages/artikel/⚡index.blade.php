@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Artikel;
-use App\Models\Kategori;
+use App\Models\Article;
+use App\Models\Category;
 use App\Models\Tag;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -59,54 +59,54 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
     }
 
     #[Computed]
-    public function artikelUnggulan(): mixed
+    public function featuredArticles(): mixed
     {
-        return Artikel::query()
-            ->with(['kategori', 'user'])
-            ->diterbitkan()
-            ->unggulan()
-            ->latest('diterbitkan_pada')
+        return Article::query()
+            ->with(['category', 'user'])
+            ->published()
+            ->featured()
+            ->latest('published_at')
             ->limit(3)
             ->get();
     }
 
     #[Computed]
-    public function artikels(): mixed
+    public function articles(): mixed
     {
-        return Artikel::query()
-            ->with(['kategori', 'tags', 'user'])
-            ->diterbitkan()
+        return Article::query()
+            ->with(['category', 'tags', 'user'])
+            ->published()
             ->when($this->cari, fn ($q) => $q->where(function ($q) {
-                $q->where('judul', 'like', '%'.$this->cari.'%')
-                    ->orWhere('ringkasan', 'like', '%'.$this->cari.'%');
+                $q->where('title', 'like', '%'.$this->cari.'%')
+                    ->orWhere('excerpt', 'like', '%'.$this->cari.'%');
             }))
             ->when($this->kategoriSlug, fn ($q) => $q->whereHas(
-                'kategori',
+                'category',
                 fn ($q) => $q->where('slug', $this->kategoriSlug)
             ))
             ->when($this->tagSlug, fn ($q) => $q->whereHas(
                 'tags',
                 fn ($q) => $q->where('slug', $this->tagSlug)
             ))
-            ->latest('diterbitkan_pada')
+            ->latest('published_at')
             ->paginate(9);
     }
 
     #[Computed]
-    public function kategoris(): mixed
+    public function categories(): mixed
     {
-        return Kategori::whereHas('artikels', fn ($q) => $q->diterbitkan())
-            ->withCount(['artikels' => fn ($q) => $q->diterbitkan()])
-            ->orderByDesc('artikels_count')
+        return Category::whereHas('articles', fn ($q) => $q->published())
+            ->withCount(['articles' => fn ($q) => $q->published()])
+            ->orderByDesc('articles_count')
             ->get();
     }
 
     #[Computed]
     public function tags(): mixed
     {
-        return Tag::whereHas('artikels', fn ($q) => $q->diterbitkan())
-            ->withCount(['artikels' => fn ($q) => $q->diterbitkan()])
-            ->orderByDesc('artikels_count')
+        return Tag::whereHas('articles', fn ($q) => $q->published())
+            ->withCount(['articles' => fn ($q) => $q->published()])
+            ->orderByDesc('articles_count')
             ->limit(20)
             ->get();
     }
@@ -163,13 +163,13 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                 >
                     Semua
                 </button>
-                @foreach ($this->kategoris as $kat)
+                @foreach ($this->categories as $kat)
                     <button
                         wire:click="filterKategori('{{ $kat->slug }}')"
                         class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition {{ $kategoriSlug === $kat->slug ? 'bg-amber-700 text-white shadow' : 'bg-amber-50 text-amber-700 hover:bg-amber-100' }}"
                     >
-                        {{ $kat->nama }}
-                        <span class="ml-1 text-xs opacity-70">({{ $kat->artikels_count }})</span>
+                        {{ $kat->name }}
+                        <span class="ml-1 text-xs opacity-70">({{ $kat->articles_count }})</span>
                     </button>
                 @endforeach
             </div>
@@ -177,7 +177,7 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
     </section>
 
     {{-- ====== ARTIKEL UNGGULAN ====== --}}
-    @if ($this->artikelUnggulan->isNotEmpty() && !$cari && !$kategoriSlug && !$tagSlug)
+    @if ($this->featuredArticles->isNotEmpty() && !$cari && !$kategoriSlug && !$tagSlug)
         <section class="py-12 bg-gradient-to-b from-amber-50 to-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center gap-3 mb-8">
@@ -187,14 +187,14 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    @php $utama = $this->artikelUnggulan->first(); @endphp
+                    @php $utama = $this->featuredArticles->first(); @endphp
 
                     {{-- Artikel utama --}}
                     <div class="lg:col-span-2">
                         <a href="{{ route('artikel.show', $utama->slug) }}" class="block group rounded-2xl overflow-hidden bg-white shadow-xl border-2 border-amber-100 hover:shadow-2xl hover:border-amber-400 transition">
                             <div class="relative overflow-hidden h-72 bg-gradient-to-br from-amber-600 to-amber-800">
-                                @if ($utama->gambar)
-                                    <img src="{{ asset('storage/'.$utama->gambar) }}" alt="{{ $utama->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                @if ($utama->image)
+                                    <img src="{{ asset('storage/'.$utama->image) }}" alt="{{ $utama->title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center">
                                         <svg class="w-20 h-20 text-amber-200" fill="currentColor" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
@@ -202,42 +202,42 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                                 @endif
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                                 <div class="absolute bottom-4 left-4">
-                                    @if ($utama->kategori)
-                                        <span class="px-3 py-1 text-xs font-bold rounded-full text-white" style="background-color: {{ $utama->kategori->warna }}">
-                                            {{ $utama->kategori->nama }}
+                                    @if ($utama->category)
+                                        <span class="px-3 py-1 text-xs font-bold rounded-full text-white" style="background-color: {{ $utama->category->color }}">
+                                            {{ $utama->category->name }}
                                         </span>
                                     @endif
                                 </div>
                             </div>
                             <div class="p-6">
                                 <div class="flex items-center gap-3 text-sm text-amber-600 mb-3">
-                                    <span>{{ $utama->diterbitkan_pada?->translatedFormat('d F Y') }}</span>
+                                    <span>{{ $utama->published_at?->translatedFormat('d F Y') }}</span>
                                     <span>·</span>
-                                    <span>{{ number_format($utama->dilihat) }} kali dilihat</span>
+                                    <span>{{ number_format($utama->views) }} kali dilihat</span>
                                 </div>
                                 <h3 class="text-2xl font-bold text-amber-900 mb-3 group-hover:text-amber-700 transition leading-tight">
-                                    {{ $utama->judul }}
+                                    {{ $utama->title }}
                                 </h3>
-                                <p class="text-amber-700 leading-relaxed line-clamp-3">{{ $utama->ringkasan }}</p>
+                                <p class="text-amber-700 leading-relaxed line-clamp-3">{{ $utama->excerpt }}</p>
                             </div>
                         </a>
                     </div>
 
                     {{-- Artikel unggulan lainnya --}}
                     <div class="flex flex-col gap-5">
-                        @foreach ($this->artikelUnggulan->skip(1) as $art)
+                        @foreach ($this->featuredArticles->skip(1) as $art)
                             <a href="{{ route('artikel.show', $art->slug) }}" class="group flex gap-4 rounded-xl overflow-hidden bg-white shadow border border-amber-100 hover:shadow-lg hover:border-amber-300 transition p-4">
                                 <div class="w-24 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-gradient-to-br from-amber-500 to-amber-700">
-                                    @if ($art->gambar)
-                                        <img src="{{ asset('storage/'.$art->gambar) }}" alt="{{ $art->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition">
+                                    @if ($art->image)
+                                        <img src="{{ asset('storage/'.$art->image) }}" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-110 transition">
                                     @endif
                                 </div>
                                 <div class="min-w-0">
-                                    @if ($art->kategori)
-                                        <span class="text-xs font-bold" style="color: {{ $art->kategori->warna }}">{{ $art->kategori->nama }}</span>
+                                    @if ($art->category)
+                                        <span class="text-xs font-bold" style="color: {{ $art->category->color }}">{{ $art->category->name }}</span>
                                     @endif
-                                    <h4 class="text-sm font-bold text-amber-900 mt-1 line-clamp-2 group-hover:text-amber-700 transition">{{ $art->judul }}</h4>
-                                    <p class="text-xs text-amber-500 mt-1">{{ $art->diterbitkan_pada?->diffForHumans() }}</p>
+                                    <h4 class="text-sm font-bold text-amber-900 mt-1 line-clamp-2 group-hover:text-amber-700 transition">{{ $art->title }}</h4>
+                                    <p class="text-xs text-amber-500 mt-1">{{ $art->published_at?->diffForHumans() }}</p>
                                 </div>
                             </a>
                         @endforeach
@@ -259,7 +259,7 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                             @if ($cari)
                                 Hasil Pencarian: "{{ $cari }}"
                             @elseif ($kategoriSlug)
-                                Kategori: {{ $this->kategoris->firstWhere('slug', $kategoriSlug)?->nama ?? $kategoriSlug }}
+                                Kategori: {{ $this->categories->firstWhere('slug', $kategoriSlug)?->name ?? $kategoriSlug }}
                             @elseif ($tagSlug)
                                 Tag: #{{ $tagSlug }}
                             @else
@@ -267,7 +267,7 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                             @endif
                         </h2>
                     </div>
-                    <p class="text-amber-600 mt-1 ml-4">{{ $this->artikels->total() }} artikel ditemukan</p>
+                    <p class="text-amber-600 mt-1 ml-4">{{ $this->articles->total() }} artikel ditemukan</p>
                 </div>
 
                 @if ($cari || $kategoriSlug || $tagSlug)
@@ -286,7 +286,7 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                             wire:click="filterTag('{{ $tag->slug }}')"
                             class="px-3 py-1 text-xs rounded-full border transition font-medium {{ $tagSlug === $tag->slug ? 'bg-amber-700 text-white border-amber-700' : 'border-amber-300 text-amber-700 hover:bg-amber-50' }}"
                         >
-                            #{{ $tag->nama }}
+                            #{{ $tag->name }}
                         </button>
                     @endforeach
                 </div>
@@ -294,7 +294,7 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
 
             {{-- Loading state --}}
             <div wire:loading.class="opacity-50 pointer-events-none" wire:target="cari,kategoriSlug,tagSlug">
-                @if ($this->artikels->isEmpty())
+                @if ($this->articles->isEmpty())
                     <div class="text-center py-20">
                         <svg class="w-16 h-16 mx-auto text-amber-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -307,25 +307,25 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                     </div>
                 @else
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        @foreach ($this->artikels as $art)
+                        @foreach ($this->articles as $art)
                             <a href="{{ route('artikel.show', $art->slug) }}" wire:navigate
                                class="group block rounded-xl overflow-hidden bg-white shadow border border-amber-100 hover:shadow-xl hover:border-amber-300 transition">
                                 <div class="relative h-48 bg-gradient-to-br from-amber-500 to-amber-700 overflow-hidden">
-                                    @if ($art->gambar)
-                                        <img src="{{ asset('storage/'.$art->gambar) }}" alt="{{ $art->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                    @if ($art->image)
+                                        <img src="{{ asset('storage/'.$art->image) }}" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center opacity-40">
                                             <svg class="w-14 h-14 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                                         </div>
                                     @endif
-                                    @if ($art->kategori)
+                                    @if ($art->category)
                                         <div class="absolute top-3 left-3">
-                                            <span class="px-3 py-1 text-xs font-bold rounded-full text-white" style="background-color: {{ $art->kategori->warna }}">
-                                                {{ $art->kategori->nama }}
+                                            <span class="px-3 py-1 text-xs font-bold rounded-full text-white" style="background-color: {{ $art->category->color }}">
+                                                {{ $art->category->name }}
                                             </span>
                                         </div>
                                     @endif
-                                    @if ($art->unggulan)
+                                    @if ($art->featured)
                                         <div class="absolute top-3 right-3">
                                             <span class="px-2 py-1 bg-yellow-400 text-yellow-900 text-xs font-bold rounded-full">★ Unggulan</span>
                                         </div>
@@ -333,18 +333,18 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                                 </div>
                                 <div class="p-5">
                                     <div class="flex items-center gap-2 text-xs text-amber-500 mb-2">
-                                        <span>{{ $art->diterbitkan_pada?->translatedFormat('d M Y') }}</span>
+                                        <span>{{ $art->published_at?->translatedFormat('d M Y') }}</span>
                                         <span>·</span>
-                                        <span>{{ number_format($art->dilihat) }} dilihat</span>
+                                        <span>{{ number_format($art->views) }} dilihat</span>
                                     </div>
                                     <h3 class="font-bold text-amber-900 mb-2 line-clamp-2 group-hover:text-amber-700 transition leading-snug">
-                                        {{ $art->judul }}
+                                        {{ $art->title }}
                                     </h3>
-                                    <p class="text-sm text-amber-700 line-clamp-3 mb-4">{{ $art->ringkasan }}</p>
+                                    <p class="text-sm text-amber-700 line-clamp-3 mb-4">{{ $art->excerpt }}</p>
                                     @if ($art->tags->isNotEmpty())
                                         <div class="flex flex-wrap gap-1">
                                             @foreach ($art->tags->take(3) as $tag)
-                                                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-600 text-xs rounded-full">#{{ $tag->nama }}</span>
+                                                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-600 text-xs rounded-full">#{{ $tag->name }}</span>
                                             @endforeach
                                         </div>
                                     @endif
@@ -358,9 +358,9 @@ new #[Title('Blog & Artikel')] #[Layout('layouts.base', ['active' => 'artikel'])
                     </div>
 
                     {{-- Pagination --}}
-                    @if ($this->artikels->hasPages())
+                    @if ($this->articles->hasPages())
                         <div class="mt-12 flex justify-center">
-                            {{ $this->artikels->links() }}
+                            {{ $this->articles->links() }}
                         </div>
                     @endif
                 @endif

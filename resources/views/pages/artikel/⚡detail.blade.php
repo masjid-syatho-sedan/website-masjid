@@ -1,36 +1,35 @@
 <?php
 
-use App\Models\Artikel;
+use App\Models\Article;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 new #[Layout('layouts.base', ['active' => 'artikel'])] class extends Component {
-    public Artikel $artikel;
+    public Article $article;
 
     public string $slug = '';
 
     public function mount(string $slug): void
     {
-        $this->artikel = Artikel::query()
-            ->with(['kategori', 'tags', 'user'])
-            ->diterbitkan()
+        $this->article = Article::query()
+            ->with(['category', 'tags', 'user'])
+            ->published()
             ->where('slug', $slug)
             ->firstOrFail();
 
-        // Tambah view count
-        $this->artikel->increment('dilihat');
+        $this->article->increment('views');
     }
 
     #[Computed]
-    public function artikelTerkait(): mixed
+    public function relatedArticles(): mixed
     {
-        return Artikel::query()
-            ->with(['kategori'])
-            ->diterbitkan()
-            ->where('id', '!=', $this->artikel->id)
-            ->when($this->artikel->kategori_id, fn ($q) => $q->where('kategori_id', $this->artikel->kategori_id))
-            ->latest('diterbitkan_pada')
+        return Article::query()
+            ->with(['category'])
+            ->published()
+            ->where('id', '!=', $this->article->id)
+            ->when($this->article->category_id, fn ($q) => $q->where('category_id', $this->article->category_id))
+            ->latest('published_at')
             ->limit(3)
             ->get();
     }
@@ -44,20 +43,20 @@ new #[Layout('layouts.base', ['active' => 'artikel'])] class extends Component {
                 <li><a href="{{ route('home') }}" wire:navigate class="hover:text-amber-900 transition">Beranda</a></li>
                 <li><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
                 <li><a href="{{ route('blog') }}" wire:navigate class="hover:text-amber-900 transition">Artikel</a></li>
-                @if ($artikel->kategori)
+                @if ($article->category)
                     <li><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
-                    <li><span class="font-semibold" style="color: {{ $artikel->kategori->warna }}">{{ $artikel->kategori->nama }}</span></li>
+                    <li><span class="font-semibold" style="color: {{ $article->category->color }}">{{ $article->category->name }}</span></li>
                 @endif
                 <li><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
-                <li class="text-amber-800 font-semibold truncate max-w-xs">{{ $artikel->judul }}</li>
+                <li class="text-amber-800 font-semibold truncate max-w-xs">{{ $article->title }}</li>
             </ol>
         </div>
     </nav>
 
-    {{-- Hero gambar --}}
+    {{-- Hero image --}}
     <div class="relative bg-gradient-to-br from-amber-700 to-amber-900 h-64 md:h-96 overflow-hidden">
-        @if ($artikel->gambar)
-            <img src="{{ asset('storage/'.$artikel->gambar) }}" alt="{{ $artikel->judul }}"
+        @if ($article->image)
+            <img src="{{ asset('storage/'.$article->image) }}" alt="{{ $article->title }}"
                  class="w-full h-full object-cover opacity-70">
         @else
             <div class="w-full h-full flex items-center justify-center">
@@ -67,7 +66,7 @@ new #[Layout('layouts.base', ['active' => 'artikel'])] class extends Component {
             </div>
         @endif
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-        @if ($artikel->unggulan)
+        @if ($article->featured)
             <div class="absolute top-4 right-4">
                 <span class="px-3 py-1 bg-yellow-400 text-yellow-900 text-sm font-bold rounded-full">★ Artikel Unggulan</span>
             </div>
@@ -82,43 +81,43 @@ new #[Layout('layouts.base', ['active' => 'artikel'])] class extends Component {
             <article class="lg:col-span-2">
                 {{-- Meta --}}
                 <div class="flex flex-wrap items-center gap-3 mb-4">
-                    @if ($artikel->kategori)
-                        <span class="px-3 py-1 text-sm font-bold rounded-full text-white" style="background-color: {{ $artikel->kategori->warna }}">
-                            {{ $artikel->kategori->nama }}
+                    @if ($article->category)
+                        <span class="px-3 py-1 text-sm font-bold rounded-full text-white" style="background-color: {{ $article->category->color }}">
+                            {{ $article->category->name }}
                         </span>
                     @endif
-                    <span class="text-sm text-amber-600">{{ $artikel->diterbitkan_pada?->translatedFormat('d F Y') }}</span>
+                    <span class="text-sm text-amber-600">{{ $article->published_at?->translatedFormat('d F Y') }}</span>
                     <span class="text-amber-300">·</span>
-                    <span class="text-sm text-amber-600">{{ number_format($artikel->dilihat) }} kali dilihat</span>
+                    <span class="text-sm text-amber-600">{{ number_format($article->views) }} kali dilihat</span>
                     <span class="text-amber-300">·</span>
-                    <span class="text-sm text-amber-600">Oleh {{ $artikel->user->name }}</span>
+                    <span class="text-sm text-amber-600">Oleh {{ $article->user->name }}</span>
                 </div>
 
                 <h1 class="text-3xl md:text-4xl font-bold text-amber-900 leading-tight mb-6">
-                    {{ $artikel->judul }}
+                    {{ $article->title }}
                 </h1>
 
-                @if ($artikel->ringkasan)
+                @if ($article->excerpt)
                     <p class="text-lg text-amber-700 border-l-4 border-amber-400 pl-4 py-2 bg-amber-50 rounded-r-xl mb-8 italic">
-                        {{ $artikel->ringkasan }}
+                        {{ $article->excerpt }}
                     </p>
                 @endif
 
-                {{-- Konten artikel --}}
+                {{-- Article content --}}
                 <div class="prose prose-amber max-w-none text-amber-900 leading-relaxed
                             prose-headings:text-amber-900 prose-a:text-amber-700 prose-strong:text-amber-900">
-                    {!! $artikel->konten !!}
+                    {!! $article->content !!}
                 </div>
 
                 {{-- Tags --}}
-                @if ($artikel->tags->isNotEmpty())
+                @if ($article->tags->isNotEmpty())
                     <div class="mt-10 pt-6 border-t border-amber-100">
                         <p class="text-sm font-bold text-amber-700 mb-3">Tag Terkait:</p>
                         <div class="flex flex-wrap gap-2">
-                            @foreach ($artikel->tags as $tag)
+                            @foreach ($article->tags as $tag)
                                 <a href="{{ route('blog', ['tag' => $tag->slug]) }}" wire:navigate
                                    class="px-3 py-1.5 bg-amber-50 border border-amber-300 text-amber-700 hover:bg-amber-100 hover:border-amber-500 text-sm rounded-full transition font-medium">
-                                    #{{ $tag->nama }}
+                                    #{{ $tag->name }}
                                 </a>
                             @endforeach
                         </div>
@@ -142,30 +141,30 @@ new #[Layout('layouts.base', ['active' => 'artikel'])] class extends Component {
                     <h3 class="font-bold text-amber-900 mb-3 text-sm uppercase tracking-wide">Tentang Penulis</h3>
                     <div class="flex items-center gap-3">
                         <div class="w-12 h-12 rounded-full bg-amber-700 flex items-center justify-center text-white font-bold text-lg">
-                            {{ $artikel->user->initials() }}
+                            {{ $article->user->initials() }}
                         </div>
                         <div>
-                            <p class="font-bold text-amber-900">{{ $artikel->user->name }}</p>
+                            <p class="font-bold text-amber-900">{{ $article->user->name }}</p>
                             <p class="text-sm text-amber-600">Pengelola Konten</p>
                         </div>
                     </div>
                 </div>
 
-                {{-- Artikel terkait --}}
-                @if ($this->artikelTerkait->isNotEmpty())
+                {{-- Related articles --}}
+                @if ($this->relatedArticles->isNotEmpty())
                     <div class="p-5 rounded-2xl bg-white border border-amber-200">
                         <h3 class="font-bold text-amber-900 mb-4 text-sm uppercase tracking-wide">Artikel Terkait</h3>
                         <div class="space-y-4">
-                            @foreach ($this->artikelTerkait as $art)
+                            @foreach ($this->relatedArticles as $art)
                                 <a href="{{ route('artikel.show', $art->slug) }}" wire:navigate class="group flex gap-3">
                                     <div class="w-16 h-14 flex-shrink-0 rounded-lg overflow-hidden bg-gradient-to-br from-amber-500 to-amber-700">
-                                        @if ($art->gambar)
-                                            <img src="{{ asset('storage/'.$art->gambar) }}" alt="{{ $art->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition">
+                                        @if ($art->image)
+                                            <img src="{{ asset('storage/'.$art->image) }}" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-110 transition">
                                         @endif
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-sm font-semibold text-amber-900 line-clamp-2 group-hover:text-amber-700 transition leading-snug">{{ $art->judul }}</p>
-                                        <p class="text-xs text-amber-500 mt-1">{{ $art->diterbitkan_pada?->diffForHumans() }}</p>
+                                        <p class="text-sm font-semibold text-amber-900 line-clamp-2 group-hover:text-amber-700 transition leading-snug">{{ $art->title }}</p>
+                                        <p class="text-xs text-amber-500 mt-1">{{ $art->published_at?->diffForHumans() }}</p>
                                     </div>
                                 </a>
                             @endforeach
