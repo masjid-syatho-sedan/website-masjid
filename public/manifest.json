@@ -1,0 +1,44 @@
+{
+    "name": "Masjid Syatho Sedan",
+    "short_name": "Masjid Syatho",
+    "description": "Website Masjid Syatho Sedan - Melayani umat dengan sepenuh hati",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#fffbeb",
+    "theme_color": "#b45309",
+    "lang": "id",
+    "scope": "/",
+    "icons": [
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "500x500",
+            "type": "image/png"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Jadwal Shalat",
+            "url": "/jadwal-sholat",
+            "description": "Lihat jadwal shalat hari ini"
+        },
+        {
+            "name": "Artikel",
+            "url": "/artikel",
+            "description": "Baca artikel islami"
+        }
+    ],
+    "categories": ["religion", "lifestyle"]
+}
