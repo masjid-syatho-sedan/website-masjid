@@ -1,0 +1,23 @@
+services:
+  masjid_syatho_sedan_db:
+    image: mysql:8.0
+    container_name: masjid_syatho_sedan_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - ./storage/mysql:/var/lib/mysql
+    networks:
+      - masjid_syatho_sedan_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-secret}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  masjid_syatho_sedan_network:
+    driver: bridge
