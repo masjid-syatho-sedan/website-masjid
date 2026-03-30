@@ -58,7 +58,7 @@ class ViewUser extends ViewRecord
         ];
     }
 
-    public function infolist(\Filament\Infolists\Infolist $infolist): \Filament\Infolists\Infolist
+    public function infolist(\Filament\Schemas\Schema $infolist): \Filament\Schemas\Schema
     {
         return $infolist
             ->schema([
