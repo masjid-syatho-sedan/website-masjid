@@ -16,6 +16,8 @@
         "livewire/blaze": "^1.0",
         "livewire/flux": "^2.9.0",
         "livewire/livewire": "^4.0",
+        "shuvroroy/filament-spatie-laravel-backup": "^3.4",
+        "spatie/laravel-backup": "^10.2",
         "spatie/laravel-permission": "^7.2"
     },
     "require-dev": {
