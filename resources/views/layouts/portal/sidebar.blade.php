@@ -406,7 +406,7 @@
         <div class="sidebar-bottom">
             <p class="nav-section" style="margin-top:4px;">Admin</p>
 
-            <a href="https://laravel.com/docs/starter-kits#livewire" target="_blank" class="nav-item">
+<!--             <a href="https://laravel.com/docs/starter-kits#livewire" target="_blank" class="nav-item">
                 <span class="nav-icon">
                     <svg width="16" height="16" fill="none" stroke="rgba(254,243,199,0.9)" stroke-width="2"
                         viewBox="0 0 24 24">
@@ -415,7 +415,7 @@
                     </svg>
                 </span>
                 {{ __('Documentation') }}
-            </a>
+            </a> -->
         </div>
 
         {{-- User Card (Desktop) --}}

@@ -1,28 +1,194 @@
-<x-layouts::auth :title="__('Confirm password')">
-    <div class="flex flex-col gap-6">
-        <x-auth-header
-            :title="__('Confirm password')"
-            :description="__('This is a secure area of the application. Please confirm your password before continuing.')"
-        />
+<x-layouts::base :title="'Konfirmasi Kata Sandi'" active="portal">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-        <x-auth-session-status class="text-center" :status="session('status')" />
+        :root {
+            --warna-utama: #1e7e34;
+            --warna-utama-gelap: #165c2d;
+            --warna-background: #ffffff;
+            --warna-border: #e5e7eb;
+            --teks-utama: #1f2937;
+            --teks-ringan: #6b7280;
+        }
 
-        <form method="POST" action="{{ route('password.confirm.store') }}" class="flex flex-col gap-6">
-            @csrf
+        * { font-family: 'Poppins', sans-serif; }
+        body { margin: 0; padding: 0; }
 
-            <flux:input
-                name="password"
-                :label="__('Password')"
-                type="password"
-                required
-                autocomplete="current-password"
-                :placeholder="__('Password')"
-                viewable
-            />
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            position: relative;
+            overflow: hidden;
+        }
 
-            <flux:button variant="primary" type="submit" class="w-full" data-test="confirm-password-button">
-                {{ __('Confirm') }}
-            </flux:button>
-        </form>
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(30,126,52,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px; right: -100px;
+            pointer-events: none;
+        }
+
+        .auth-container::after {
+            content: '';
+            position: absolute;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -50px; left: -50px;
+            pointer-events: none;
+        }
+
+        .auth-wrapper {
+            position: relative; z-index: 10;
+            width: 100%; max-width: 450px;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: var(--warna-background);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(30,126,52,0.08);
+            border: 1px solid rgba(30,126,52,0.1);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .logo-icon {
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, var(--warna-utama) 0%, var(--warna-utama-gelap) 100%);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 30px;
+        }
+
+        .auth-header h1 {
+            font-size: 1.75rem; font-weight: 700;
+            color: var(--teks-utama);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .auth-header p {
+            color: var(--teks-ringan);
+            font-size: 0.9rem; line-height: 1.6;
+            margin: 0;
+        }
+
+        .auth-form {
+            display: flex; flex-direction: column; gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex; flex-direction: column; gap: 0.6rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem; font-weight: 500;
+            color: var(--teks-utama);
+        }
+
+        .form-group input {
+            padding: 0.95rem 1rem;
+            border: 1.5px solid var(--warna-border);
+            border-radius: 10px;
+            font-size: 0.95rem; color: var(--teks-utama);
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--warna-utama);
+            background: var(--warna-background);
+            box-shadow: 0 0 0 3px rgba(30,126,52,0.1);
+        }
+
+        .form-group input::placeholder { color: var(--teks-ringan); }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--warna-utama) 0%, var(--warna-utama-gelap) 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border: none; border-radius: 10px;
+            font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            box-shadow: 0 10px 25px rgba(30,126,52,0.2);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(30,126,52,0.3);
+        }
+
+        .submit-btn:active { transform: translateY(0); }
+
+        .status-message {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 1.5px solid #6ee7b7;
+            border-radius: 10px; padding: 1rem;
+            margin-bottom: 1.5rem;
+            color: #059669; font-size: 0.875rem;
+        }
+
+        .error-field { border-color: #ef4444 !important; }
+        .error-text { color: #dc2626; font-size: 0.8rem; margin-top: 0.3rem; }
+
+        @media (max-width: 640px) {
+            .auth-wrapper { padding: 1rem; }
+            .auth-card { padding: 2rem 1.5rem; border-radius: 16px; }
+            .auth-header h1 { font-size: 1.5rem; }
+        }
+    </style>
+
+    <div class="auth-container">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="logo-icon">🛡️</div>
+                    <h1>Konfirmasi Kata Sandi</h1>
+                    <p>Ini adalah area aman. Masukkan kata sandi Anda untuk melanjutkan.</p>
+                </div>
+
+                @if (session('status'))
+                    <div class="status-message">✓ {{ session('status') }}</div>
+                @endif
+
+                <form method="POST" action="{{ route('password.confirm.store') }}" class="auth-form">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="password">Kata Sandi</label>
+                        <input
+                            id="password" type="password" name="password"
+                            required autocomplete="current-password"
+                            placeholder="••••••••"
+                            class="{{ $errors->has('password') ? 'error-field' : '' }}"
+                        />
+                        @error('password')<span class="error-text">{{ $message }}</span>@enderror
+                    </div>
+
+                    <button type="submit" class="submit-btn" data-test="confirm-password-button">
+                        Konfirmasi
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-</x-layouts::auth>
+</x-layouts::base>

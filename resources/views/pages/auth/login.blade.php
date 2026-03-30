@@ -240,6 +240,53 @@
             text-decoration: underline;
         }
 
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            color: var(--teks-ringan);
+            font-size: 0.8rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--warna-border);
+        }
+
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border: 1.5px solid var(--warna-border);
+            border-radius: 10px;
+            background: #fff;
+            color: var(--teks-utama);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .google-btn:hover {
+            border-color: #4285f4;
+            background: #f8f9ff;
+            box-shadow: 0 4px 16px rgba(66, 133, 244, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .google-btn svg {
+            flex-shrink: 0;
+        }
+
         .status-message {
             background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
             border: 1.5px solid #6ee7b7;
@@ -392,10 +439,22 @@
                     </button>
                 </form>
 
+                <!-- Masuk dengan Google -->
+                <div class="divider">atau</div>
+                <a href="{{ route('auth.google') }}" class="google-btn">
+                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M47.532 24.552c0-1.636-.145-3.2-.418-4.698H24.48v9.01h12.958c-.572 2.98-2.26 5.504-4.77 7.198v5.986h7.698c4.506-4.15 7.166-10.268 7.166-17.496z" fill="#4285F4"/>
+                        <path d="M24.48 48c6.495 0 11.943-2.152 15.924-5.832l-7.698-5.986c-2.15 1.44-4.898 2.288-8.226 2.288-6.326 0-11.682-4.272-13.596-10.01H3.002v6.18C6.967 42.888 15.153 48 24.48 48z" fill="#34A853"/>
+                        <path d="M10.884 28.46A14.434 14.434 0 0 1 10.1 24c0-1.564.27-3.086.784-4.46v-6.18H3.002A23.98 23.98 0 0 0 .48 24c0 3.874.926 7.538 2.522 10.64l7.882-6.18z" fill="#FBBC05"/>
+                        <path d="M24.48 9.532c3.564 0 6.762 1.224 9.282 3.632l6.948-6.948C36.416 2.39 30.974 0 24.48 0 15.153 0 6.967 5.112 3.002 13.36l7.882 6.18c1.914-5.738 7.27-10.008 13.596-10.008z" fill="#EA4335"/>
+                    </svg>
+                    Masuk dengan Google
+                </a>
+
                 <!-- Daftar Akun Baru -->
                 @if (Route::has('register'))
                     <div class="signup-prompt">
-                        Belum punya akun? 
+                        Belum punya akun?
                         <a href="{{ route('register') }}" wire:navigate>Daftar di sini</a>
                     </div>
                 @endif

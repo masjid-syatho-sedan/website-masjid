@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialiteController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'pages.home.index')->name('home');
@@ -13,5 +14,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('portal', 'pages.dashboard.index')->name('dashboard');
 
 });
+
+Route::get('/auth/google', [SocialiteController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
 require __DIR__.'/settings.php';
