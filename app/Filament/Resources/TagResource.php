@@ -24,23 +24,23 @@ class TagResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-hashtag';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Konten';
+    protected static \UnitEnum|string|null $navigationGroup = 'Content';
 
-    protected static ?string $navigationLabel = 'Tag';
+    protected static ?string $navigationLabel = 'Tags';
 
     protected static ?string $modelLabel = 'Tag';
 
-    protected static ?string $pluralModelLabel = 'Tag';
+    protected static ?string $pluralModelLabel = 'Tags';
 
     protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Informasi Tag')
+            Section::make('Tag Information')
                 ->schema([
-                    TextInput::make('nama')
-                        ->label('Nama Tag')
+                    TextInput::make('name')
+                        ->label('Tag Name')
                         ->required()
                         ->maxLength(100)
                         ->live(onBlur: true)
@@ -65,8 +65,8 @@ class TagResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
-                    ->label('Nama')
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Name')
                     ->searchable()
                     ->sortable()
                     ->badge()
@@ -77,15 +77,15 @@ class TagResource extends Resource
                     ->searchable()
                     ->toggleable(),
 
-                Tables\Columns\TextColumn::make('artikels_count')
-                    ->label('Jumlah Artikel')
-                    ->counts('artikels')
+                Tables\Columns\TextColumn::make('articles_count')
+                    ->label('Article Count')
+                    ->counts('articles')
                     ->sortable()
                     ->badge()
                     ->color('gray'),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dibuat')
+                    ->label('Created')
                     ->dateTime('d M Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -100,7 +100,7 @@ class TagResource extends Resource
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('nama', 'asc');
+            ->defaultSort('name', 'asc');
     }
 
     public static function getRelationManagers(): array

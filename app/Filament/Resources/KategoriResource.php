@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\KategoriResource\Pages;
 use App\Filament\Resources\KategoriResource\RelationManagers;
-use App\Models\Kategori;
+use App\Models\Category;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -22,27 +22,27 @@ use Illuminate\Support\Str;
 
 class KategoriResource extends Resource
 {
-    protected static ?string $model = Kategori::class;
+    protected static ?string $model = Category::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-tag';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Konten';
+    protected static \UnitEnum|string|null $navigationGroup = 'Content';
 
-    protected static ?string $navigationLabel = 'Kategori';
+    protected static ?string $navigationLabel = 'Categories';
 
-    protected static ?string $modelLabel = 'Kategori';
+    protected static ?string $modelLabel = 'Category';
 
-    protected static ?string $pluralModelLabel = 'Kategori';
+    protected static ?string $pluralModelLabel = 'Categories';
 
     protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Informasi Kategori')
+            Section::make('Category Information')
                 ->schema([
-                    TextInput::make('nama')
-                        ->label('Nama Kategori')
+                    TextInput::make('name')
+                        ->label('Category Name')
                         ->required()
                         ->maxLength(100)
                         ->live(onBlur: true)
@@ -57,18 +57,18 @@ class KategoriResource extends Resource
                         ->label('Slug')
                         ->required()
                         ->maxLength(100)
-                        ->unique(Kategori::class, 'slug', ignoreRecord: true),
+                        ->unique(Category::class, 'slug', ignoreRecord: true),
 
-                    Textarea::make('deskripsi')
-                        ->label('Deskripsi')
+                    Textarea::make('description')
+                        ->label('Description')
                         ->rows(3)
                         ->maxLength(500)
                         ->columnSpanFull(),
 
-                    ColorPicker::make('warna')
-                        ->label('Warna Badge')
+                    ColorPicker::make('color')
+                        ->label('Badge Color')
                         ->default('#b45309')
-                        ->helperText('Warna yang ditampilkan pada badge kategori.'),
+                        ->helperText('Color shown on the category badge.'),
                 ])
                 ->columns(2),
         ]);
@@ -78,11 +78,11 @@ class KategoriResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ColorColumn::make('warna')
+                Tables\Columns\ColorColumn::make('color')
                     ->label(''),
 
-                Tables\Columns\TextColumn::make('nama')
-                    ->label('Nama')
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Name')
                     ->searchable()
                     ->sortable(),
 
@@ -91,20 +91,20 @@ class KategoriResource extends Resource
                     ->searchable()
                     ->toggleable(),
 
-                Tables\Columns\TextColumn::make('artikels_count')
-                    ->label('Jumlah Artikel')
-                    ->counts('artikels')
+                Tables\Columns\TextColumn::make('articles_count')
+                    ->label('Article Count')
+                    ->counts('articles')
                     ->sortable()
                     ->badge()
                     ->color('primary'),
 
-                Tables\Columns\TextColumn::make('deskripsi')
-                    ->label('Deskripsi')
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Description')
                     ->limit(60)
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dibuat')
+                    ->label('Created')
                     ->dateTime('d M Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -119,7 +119,7 @@ class KategoriResource extends Resource
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('nama', 'asc');
+            ->defaultSort('name', 'asc');
     }
 
     public static function getRelationManagers(): array

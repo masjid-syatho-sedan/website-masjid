@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ArtikelResource\Pages;
-use App\Models\Artikel;
+use App\Models\Article as Artikel;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -37,13 +37,13 @@ class ArtikelResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Konten';
+    protected static \UnitEnum|string|null $navigationGroup = 'Content';
 
-    protected static ?string $navigationLabel = 'Artikel';
+    protected static ?string $navigationLabel = 'Articles';
 
-    protected static ?string $modelLabel = 'Artikel';
+    protected static ?string $modelLabel = 'Article';
 
-    protected static ?string $pluralModelLabel = 'Artikel';
+    protected static ?string $pluralModelLabel = 'Articles';
 
     protected static ?int $navigationSort = 1;
 
@@ -52,10 +52,10 @@ class ArtikelResource extends Resource
         return $schema->components([
             Group::make()
                 ->schema([
-                    Section::make('Informasi Artikel')
+                    Section::make('Article Information')
                         ->schema([
-                            TextInput::make('judul')
-                                ->label('Judul')
+                            TextInput::make('title')
+                                ->label('Title')
                                 ->required()
                                 ->maxLength(255)
                                 ->live(onBlur: true)
@@ -67,24 +67,24 @@ class ArtikelResource extends Resource
                                 }),
 
                             TextInput::make('slug')
-                                ->label('Slug URL')
+                                ->label('URL Slug')
                                 ->required()
                                 ->maxLength(255)
                                 ->unique(Artikel::class, 'slug', ignoreRecord: true)
-                                ->helperText('URL artikel, diisi otomatis dari judul.'),
+                                ->helperText('Article URL, auto-filled from title.'),
 
-                            Textarea::make('ringkasan')
-                                ->label('Ringkasan')
+                            Textarea::make('excerpt')
+                                ->label('Summary')
                                 ->rows(3)
                                 ->maxLength(500)
                                 ->columnSpanFull()
-                                ->helperText('Ringkasan singkat artikel (maks. 500 karakter).'),
+                                ->helperText('Brief article summary (max. 500 characters).'),
                         ])
                         ->columns(2),
 
-                    Section::make('Konten Artikel')
+                    Section::make('Article Content')
                         ->schema([
-                            RichEditor::make('konten')
+                            RichEditor::make('content')
                                 ->label('')
                                 ->required()
                                 ->toolbarButtons([
@@ -104,19 +104,19 @@ class ArtikelResource extends Resource
                                     'undo',
                                 ])
                                 ->fileAttachmentsDisk('public')
-                                ->fileAttachmentsDirectory('artikel/lampiran')
+                                ->fileAttachmentsDirectory('articles/attachments')
                                 ->columnSpanFull(),
                         ]),
 
-                    Section::make('Gambar Utama')
+                    Section::make('Featured Image')
                         ->schema([
-                            FileUpload::make('gambar')
+                            FileUpload::make('image')
                                 ->label('')
                                 ->image()
                                 ->imageEditor()
                                 ->imageResizeMode('cover')
                                 ->imageCropAspectRatio('16:9')
-                                ->directory('artikel/gambar')
+                                ->directory('articles/images')
                                 ->disk('public')
                                 ->columnSpanFull(),
                         ]),
@@ -125,40 +125,40 @@ class ArtikelResource extends Resource
 
             Group::make()
                 ->schema([
-                    Section::make('Penerbitan')
+                    Section::make('Publication')
                         ->schema([
                             Select::make('status')
                                 ->label('Status')
                                 ->options([
                                     'draft' => 'Draft',
-                                    'diterbitkan' => 'Diterbitkan',
-                                    'diarsipkan' => 'Diarsipkan',
+                                    'published' => 'Published',
+                                    'archived' => 'Archived',
                                 ])
                                 ->default('draft')
                                 ->required()
                                 ->live(),
 
-                            DateTimePicker::make('diterbitkan_pada')
-                                ->label('Tanggal Terbit')
+                            DateTimePicker::make('published_at')
+                                ->label('Publish Date')
                                 ->default(now())
-                                ->visible(fn (Get $get) => $get('status') === 'diterbitkan'),
+                                ->visible(fn (Get $get) => $get('status') === 'published'),
 
-                            Toggle::make('unggulan')
-                                ->label('Artikel Unggulan')
+                            Toggle::make('featured')
+                                ->label('Featured Article')
                                 ->default(false)
-                                ->helperText('Tampilkan di bagian unggulan halaman depan.'),
+                                ->helperText('Show in the featured section on the front page.'),
                         ]),
 
-                    Section::make('Klasifikasi')
+                    Section::make('Classification')
                         ->schema([
-                            Select::make('kategori_id')
-                                ->label('Kategori')
-                                ->relationship('kategori', 'nama')
+                            Select::make('category_id')
+                                ->label('Category')
+                                ->relationship('category', 'name')
                                 ->searchable()
                                 ->preload()
                                 ->createOptionForm([
-                                    TextInput::make('nama')
-                                        ->label('Nama Kategori')
+                                    TextInput::make('name')
+                                        ->label('Category Name')
                                         ->required()
                                         ->live(onBlur: true)
                                         ->afterStateUpdated(fn ($state, Set $set) => $set('slug', Str::slug($state))),
@@ -167,24 +167,24 @@ class ArtikelResource extends Resource
                                         ->label('Slug')
                                         ->required(),
 
-                                    Textarea::make('deskripsi')
-                                        ->label('Deskripsi')
+                                    Textarea::make('description')
+                                        ->label('Description')
                                         ->rows(2),
 
-                                    ColorPicker::make('warna')
-                                        ->label('Warna Badge')
+                                    ColorPicker::make('color')
+                                        ->label('Badge Color')
                                         ->default('#b45309'),
                                 ]),
 
                             Select::make('tags')
-                                ->label('Tag')
-                                ->relationship('tags', 'nama')
+                                ->label('Tags')
+                                ->relationship('tags', 'name')
                                 ->multiple()
                                 ->searchable()
                                 ->preload()
                                 ->createOptionForm([
-                                    TextInput::make('nama')
-                                        ->label('Nama Tag')
+                                    TextInput::make('name')
+                                        ->label('Tag Name')
                                         ->required()
                                         ->live(onBlur: true)
                                         ->afterStateUpdated(fn ($state, Set $set) => $set('slug', Str::slug($state))),
@@ -195,10 +195,10 @@ class ArtikelResource extends Resource
                                 ]),
                         ]),
 
-                    Section::make('Statistik')
+                    Section::make('Statistics')
                         ->schema([
-                            TextInput::make('dilihat')
-                                ->label('Jumlah Dilihat')
+                            TextInput::make('views')
+                                ->label('View Count')
                                 ->numeric()
                                 ->default(0)
                                 ->disabled()
@@ -214,20 +214,20 @@ class ArtikelResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('gambar')
+                Tables\Columns\ImageColumn::make('image')
                     ->label('')
                     ->height(48)
                     ->width(72),
 
-                Tables\Columns\TextColumn::make('judul')
-                    ->label('Judul')
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
                     ->searchable()
                     ->sortable()
                     ->limit(50)
-                    ->description(fn (Artikel $record) => $record->kategori?->nama),
+                    ->description(fn (Artikel $record) => $record->category?->name),
 
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Penulis')
+                    ->label('Author')
                     ->sortable()
                     ->toggleable(),
 
@@ -235,39 +235,39 @@ class ArtikelResource extends Resource
                     ->label('Status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'diterbitkan' => 'success',
+                        'published' => 'success',
                         'draft' => 'warning',
-                        'diarsipkan' => 'gray',
+                        'archived' => 'gray',
                         default => 'gray',
                     })
                     ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'diterbitkan' => 'Diterbitkan',
+                        'published' => 'Published',
                         'draft' => 'Draft',
-                        'diarsipkan' => 'Diarsipkan',
+                        'archived' => 'Archived',
                         default => $state,
                     }),
 
-                Tables\Columns\IconColumn::make('unggulan')
-                    ->label('Unggulan')
+                Tables\Columns\IconColumn::make('featured')
+                    ->label('Featured')
                     ->boolean()
                     ->trueIcon('heroicon-o-star')
                     ->falseIcon('heroicon-o-star')
                     ->trueColor('warning')
                     ->falseColor('gray'),
 
-                Tables\Columns\TextColumn::make('dilihat')
-                    ->label('Dilihat')
+                Tables\Columns\TextColumn::make('views')
+                    ->label('Views')
                     ->numeric()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('diterbitkan_pada')
-                    ->label('Diterbitkan')
+                Tables\Columns\TextColumn::make('published_at')
+                    ->label('Published')
                     ->dateTime('d M Y, H:i')
                     ->sortable()
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dibuat')
+                    ->label('Created')
                     ->dateTime('d M Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -277,29 +277,35 @@ class ArtikelResource extends Resource
                     ->label('Status')
                     ->options([
                         'draft' => 'Draft',
-                        'diterbitkan' => 'Diterbitkan',
-                        'diarsipkan' => 'Diarsipkan',
+                        'published' => 'Published',
+                        'archived' => 'Archived',
                     ]),
 
-                Tables\Filters\SelectFilter::make('kategori_id')
-                    ->label('Kategori')
-                    ->relationship('kategori', 'nama')
+                Tables\Filters\SelectFilter::make('category_id')
+                    ->label('Category')
+                    ->relationship('category', 'name')
                     ->preload(),
 
-                Tables\Filters\TernaryFilter::make('unggulan')
-                    ->label('Unggulan'),
+                Tables\Filters\SelectFilter::make('tags')
+                    ->label('Tag')
+                    ->relationship('tags', 'name')
+                    ->preload()
+                    ->multiple(),
 
-                Filter::make('diterbitkan_pada')
+                Tables\Filters\TernaryFilter::make('featured')
+                    ->label('Featured'),
+
+                Filter::make('published_at')
                     ->schema([
                         \Filament\Forms\Components\DatePicker::make('dari')
-                            ->label('Dari Tanggal'),
+                            ->label('From Date'),
                         \Filament\Forms\Components\DatePicker::make('sampai')
-                            ->label('Sampai Tanggal'),
+                            ->label('To Date'),
                     ])
                     ->query(function ($query, array $data) {
                         return $query
-                            ->when($data['dari'], fn ($q) => $q->whereDate('diterbitkan_pada', '>=', $data['dari']))
-                            ->when($data['sampai'], fn ($q) => $q->whereDate('diterbitkan_pada', '<=', $data['sampai']));
+                            ->when($data['dari'], fn ($q) => $q->whereDate('published_at', '>=', $data['dari']))
+                            ->when($data['sampai'], fn ($q) => $q->whereDate('published_at', '<=', $data['sampai']));
                     }),
             ])
             ->actions([
@@ -307,23 +313,23 @@ class ArtikelResource extends Resource
                     ViewAction::make(),
                     EditAction::make(),
                     FilamentAction::make('terbitkan')
-                        ->label('Terbitkan')
+                        ->label('Publish')
                         ->icon('heroicon-o-check-circle')
                         ->color('success')
-                        ->visible(fn (Artikel $record) => $record->status !== 'diterbitkan')
+                        ->visible(fn (Artikel $record) => $record->status !== 'published')
                         ->action(function (Artikel $record) {
                             $record->update([
-                                'status' => 'diterbitkan',
-                                'diterbitkan_pada' => $record->diterbitkan_pada ?? now(),
+                                'status' => 'published',
+                                'published_at' => $record->published_at ?? now(),
                             ]);
                         })
                         ->requiresConfirmation(),
                     FilamentAction::make('arsipkan')
-                        ->label('Arsipkan')
+                        ->label('Archive')
                         ->icon('heroicon-o-archive-box')
                         ->color('gray')
-                        ->visible(fn (Artikel $record) => $record->status !== 'diarsipkan')
-                        ->action(fn (Artikel $record) => $record->update(['status' => 'diarsipkan']))
+                        ->visible(fn (Artikel $record) => $record->status !== 'archived')
+                        ->action(fn (Artikel $record) => $record->update(['status' => 'archived']))
                         ->requiresConfirmation(),
                     DeleteAction::make(),
                 ]),
@@ -331,19 +337,19 @@ class ArtikelResource extends Resource
             ->bulkActions([
                 BulkActionGroup::make([
                     BulkAction::make('terbitkan_semua')
-                        ->label('Terbitkan')
+                        ->label('Publish')
                         ->icon('heroicon-o-check-circle')
                         ->color('success')
                         ->action(fn ($records) => $records->each->update([
-                            'status' => 'diterbitkan',
-                            'diterbitkan_pada' => now(),
+                            'status' => 'published',
+                            'published_at' => now(),
                         ]))
                         ->requiresConfirmation(),
                     BulkAction::make('arsipkan_semua')
-                        ->label('Arsipkan')
+                        ->label('Archive')
                         ->icon('heroicon-o-archive-box')
                         ->color('gray')
-                        ->action(fn ($records) => $records->each->update(['status' => 'diarsipkan']))
+                        ->action(fn ($records) => $records->each->update(['status' => 'archived']))
                         ->requiresConfirmation(),
                     DeleteBulkAction::make(),
                 ]),

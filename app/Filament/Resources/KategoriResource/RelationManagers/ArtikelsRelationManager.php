@@ -11,15 +11,15 @@ use Filament\Tables\Table;
 
 class ArtikelsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'artikels';
+    protected static string $relationship = 'articles';
 
-    protected static ?string $title = 'Artikel dalam Kategori';
+    protected static ?string $title = 'Articles in Category';
 
     public function form(Schema $schema): Schema
     {
         return $schema->components([
-            TextInput::make('judul')
-                ->label('Judul')
+            TextInput::make('title')
+                ->label('Title')
                 ->required()
                 ->maxLength(255),
         ]);
@@ -28,41 +28,41 @@ class ArtikelsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('judul')
+            ->recordTitleAttribute('title')
             ->columns([
-                Tables\Columns\ImageColumn::make('gambar')
+                Tables\Columns\ImageColumn::make('image')
                     ->label('')
                     ->height(40)
                     ->width(60),
 
-                Tables\Columns\TextColumn::make('judul')
-                    ->label('Judul')
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
                     ->searchable()
                     ->sortable()
                     ->limit(60),
 
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Penulis')
+                    ->label('Author')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'diterbitkan' => 'success',
+                        'published' => 'success',
                         'draft' => 'warning',
-                        'diarsipkan' => 'gray',
+                        'archived' => 'gray',
                         default => 'gray',
                     })
                     ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'diterbitkan' => 'Diterbitkan',
+                        'published' => 'Published',
                         'draft' => 'Draft',
-                        'diarsipkan' => 'Diarsipkan',
+                        'archived' => 'Archived',
                         default => $state,
                     }),
 
-                Tables\Columns\TextColumn::make('diterbitkan_pada')
-                    ->label('Diterbitkan')
+                Tables\Columns\TextColumn::make('published_at')
+                    ->label('Published')
                     ->dateTime('d M Y')
                     ->sortable(),
             ])
