@@ -153,12 +153,12 @@
                                 </div>
                                 Sound system
                             </div>
-                            <div class="flex items-center gap-2 text-sm text-amber-700">
+                            <!-- <div class="flex items-center gap-2 text-sm text-amber-700">
                                 <div class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-3 h-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                                 </div>
                                 AC & kipas
-                            </div>
+                            </div> -->
                             <div class="flex items-center gap-2 text-sm text-amber-700">
                                 <div class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-3 h-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -239,12 +239,12 @@
                                 </div>
                                 Area teduh
                             </div>
-                            <div class="flex items-center gap-2 text-sm text-amber-700">
+                            <!-- <div class="flex items-center gap-2 text-sm text-amber-700">
                                 <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                                 </div>
                                 Bangku tersedia
-                            </div>
+                            </div> -->
                             <div class="flex items-center gap-2 text-sm text-amber-700">
                                 <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -480,26 +480,6 @@
                                 <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Banyak Kran</span>
                                 <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Anti-licin</span>
                                 <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">Air bersih</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Mesin Pompa Air --}}
-                <div class="bg-white rounded-2xl shadow-sm border border-cyan-100 p-8 hover:shadow-md transition">
-                    <div class="flex items-start gap-5">
-                        <div class="w-14 h-14 bg-cyan-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 19l-7-7h4V4h6v8h4l-7 7z"/>
-                            </svg>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold text-amber-900 mb-2">Mesin Pompa Air</h3>
-                            <p class="text-amber-700 mb-5">Mesin pompa air berkapasitas besar memastikan pasokan air bersih yang cukup untuk seluruh kebutuhan masjid, mulai dari wudhu, toilet, hingga kegiatan kebersihan lingkungan masjid.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-xs font-semibold">Kapasitas besar</span>
-                                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Siap pakai</span>
-                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Air terjaga</span>
                             </div>
                         </div>
                     </div>
