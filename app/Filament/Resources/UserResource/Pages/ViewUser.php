@@ -62,7 +62,7 @@ class ViewUser extends ViewRecord
     {
         return $infolist
             ->schema([
-                \Filament\Infolists\Components\Group::make()
+                \Filament\Schemas\Components\Group::make()
                     ->schema([
                         \Filament\Infolists\Components\Section::make('Personal Information')
                             ->schema([
@@ -106,7 +106,7 @@ class ViewUser extends ViewRecord
                     ])
                     ->columnSpan(2),
 
-                \Filament\Infolists\Components\Group::make()
+                \Filament\Schemas\Components\Group::make()
                     ->schema([
                         \Filament\Infolists\Components\Section::make('Roles')
                             ->schema([

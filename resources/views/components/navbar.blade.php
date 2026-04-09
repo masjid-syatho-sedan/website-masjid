@@ -20,6 +20,10 @@
                     class="transition font-bold {{ $active === 'artikel' ? 'text-amber-600 border-b-2 border-amber-500 pb-0.5' : 'text-amber-700 hover:text-amber-500' }}">
                     Artikel
                 </a>
+                <a wire:navigate href="/fasilitas"
+                    class="transition font-bold {{ $active === 'fasilitas' ? 'text-amber-600 border-b-2 border-amber-500 pb-0.5' : 'text-amber-700 hover:text-amber-500' }}">
+                    Fasilitas
+                </a>
 
                 <!-- Portal -->
                 @auth
@@ -55,6 +59,10 @@
             <a wire:navigate href="/blog"
                 class="block px-3 py-2 transition font-bold {{ $active === 'artikel' ? 'text-amber-600 bg-amber-50 border-l-4 border-amber-500' : 'text-amber-700 hover:text-amber-500 hover:bg-amber-50' }}">
                 Artikel
+            </a>
+            <a wire:navigate href="/fasilitas"
+                class="block px-3 py-2 transition font-bold {{ $active === 'fasilitas' ? 'text-amber-600 bg-amber-50 border-l-4 border-amber-500' : 'text-amber-700 hover:text-amber-500 hover:bg-amber-50' }}">
+                Fasilitas
             </a>
 
             {{-- Portal --}}

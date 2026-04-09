@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'pages.home.index')->name('home');
 
+Route::view('/fasilitas', 'pages.fasilitas.index')->name('fasilitas');
+Route::view('/fasilitas/ambulans', 'pages.fasilitas.ambulans')->name('fasilitas.ambulans');
+
 Route::redirect('/blog', '/artikel');
 Route::livewire('/artikel', 'pages::artikel.index')->name('blog');
 Route::livewire('/artikel/{slug}', 'pages::artikel.detail')->name('artikel.show');
