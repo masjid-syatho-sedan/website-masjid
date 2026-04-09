@@ -64,7 +64,7 @@ class ViewUser extends ViewRecord
             ->schema([
                 \Filament\Schemas\Components\Group::make()
                     ->schema([
-                        \Filament\Infolists\Components\Section::make('Personal Information')
+                        \Filament\Schemas\Components\Section::make('Personal Information')
                             ->schema([
                                 \Filament\Infolists\Components\TextEntry::make('name')
                                     ->label('Full Name'),
@@ -84,7 +84,7 @@ class ViewUser extends ViewRecord
                             ])
                             ->columns(2),
 
-                        \Filament\Infolists\Components\Section::make('Articles')
+                        \Filament\Schemas\Components\Section::make('Articles')
                             ->schema([
                                 \Filament\Infolists\Components\TextEntry::make('articles_count')
                                     ->label('Total Articles')
@@ -108,7 +108,7 @@ class ViewUser extends ViewRecord
 
                 \Filament\Schemas\Components\Group::make()
                     ->schema([
-                        \Filament\Infolists\Components\Section::make('Roles')
+                        \Filament\Schemas\Components\Section::make('Roles')
                             ->schema([
                                 \Filament\Infolists\Components\TextEntry::make('roles.name')
                                     ->label('Assigned Roles')
@@ -118,7 +118,7 @@ class ViewUser extends ViewRecord
                                     ->placeholder('No roles assigned'),
                             ]),
 
-                        \Filament\Infolists\Components\Section::make('Account Status')
+                        \Filament\Schemas\Components\Section::make('Account Status')
                             ->schema([
                                 \Filament\Infolists\Components\IconEntry::make('email_verified_at')
                                     ->label('Email Verified')
