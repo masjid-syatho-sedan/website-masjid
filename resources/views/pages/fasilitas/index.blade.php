@@ -485,6 +485,26 @@
                     </div>
                 </div>
 
+                {{-- Mesin Pompa Angin (Kompresor) untuk Isi Angin Ban --}}
+                <div class="bg-white rounded-2xl shadow-sm border border-cyan-100 p-8 hover:shadow-md transition">
+                    <div class="flex items-start gap-5">
+                        <div class="w-14 h-14 bg-cyan-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 19l-7-7h4V4h6v8h4l-7 7z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-amber-900 mb-2">Mesin Pompa Angin (Kompresor)</h3>
+                            <p class="text-amber-700 mb-5">Mesin pompa angin berkapasitas besar memastikan pasokan angin yang cukup untuk mengisi angin ban kendaraan yang ada di area masjid.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-xs font-semibold">Mudah digunakan</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Siap pakai</span>
+                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Gratis penggunaan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Kulkas --}}
                 <div class="bg-white rounded-2xl shadow-sm border border-cyan-100 p-8 hover:shadow-md transition">
                     <div class="flex items-start gap-5">
