@@ -11,7 +11,7 @@
 
         <x-footer />
 
-        <x-whatsapp-floating />
+        <x-whatsapp-floating :phone="$whatsappPhone ?? '6281353652777'" :label="$whatsappLabel ?? 'Call Center Masjid'" />
 
         @fluxScripts
     </body>

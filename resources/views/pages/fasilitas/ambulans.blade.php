@@ -1,4 +1,4 @@
-<x-layouts::base title="Layanan Ambulans - Masjid Syatho Sedan" active="ambulans">
+<x-layouts::base title="Layanan Ambulans - Masjid Syatho Sedan" active="ambulans" whatsappPhone="6282147977779" whatsappLabel="Hubungi Ambulans">
 
     {{-- Hero Section --}}
     <section class="relative bg-gradient-to-br from-red-700 via-red-600 to-red-800 overflow-hidden pt-16 pb-16 md:pt-20 md:pb-20">
