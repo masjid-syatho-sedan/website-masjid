@@ -5,7 +5,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-new #[Layout('layouts.base', ['active' => 'ambulans'])] class extends Component {
+new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', ['active' => 'ambulans'])] class extends Component {
     public AmbulanceJournal $journal;
 
     public function mount(string $id): void
@@ -14,14 +14,16 @@ new #[Layout('layouts.base', ['active' => 'ambulans'])] class extends Component 
             ->published()
             ->findOrFail($id);
     }
-
-    public function title(): string
-    {
-        return $this->journal->title.' — Jurnal Ambulans';
-    }
 }; ?>
 
 <div>
+    @push('og-meta')
+        <meta property="og:title" content="{{ $journal->title }} — Jurnal Ambulans Masjid Syatho Sedan" />
+        <meta property="og:description" content="{{ $journal->description ? Str::limit($journal->description, 160) : 'Jurnal perjalanan ambulans Masjid Syatho Sedan, '.$journal->journal_date->translatedFormat('d F Y') }}" />
+        <meta property="og:url" content="{{ route('fasilitas.ambulans.jurnal.show', $journal->id) }}" />
+        <meta property="og:type" content="article" />
+    @endpush
+
     {{-- ====== HERO ====== --}}
     <section class="relative bg-gradient-to-br from-red-700 via-red-600 to-red-800 overflow-hidden py-14 md:py-18">
         <div class="absolute inset-0 opacity-10">

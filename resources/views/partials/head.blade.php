@@ -23,6 +23,15 @@
 <meta name="keywords" content="masjid, jadwal shalat, kajian Islam, komunitas Muslim" />
 <meta name="google-site-verification" content="rnppDMJTkKP3WB3d2T3YZLJi3yfnCuRT_lIpLLNkCC8" />
 
+{{-- Open Graph (default, dapat di-override per halaman via @push('og-meta')) --}}
+<meta property="og:site_name" content="Masjid Syatho Sedan" />
+<meta property="og:locale" content="id_ID" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ url()->current() }}" />
+<meta property="og:title" content="{{ filled($title ?? null) ? $title.' - Masjid Syatho Sedan' : 'Masjid Syatho Sedan' }}" />
+<meta property="og:description" content="Website Masjid Syatho Sedan - Melayani umat dengan sepenuh hati" />
+@stack('og-meta')
+
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
