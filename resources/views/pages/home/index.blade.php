@@ -199,10 +199,16 @@
                     </div>
                     <h3 class="text-lg font-bold text-amber-900 mb-2">Layanan Ambulans</h3>
                     <p class="text-amber-700 mb-4">Ambulans siaga untuk memberikan respons cepat dalam keadaan darurat</p>
-                    <a wire:navigate href="/fasilitas/ambulans" class="inline-flex items-center gap-1.5 text-sm font-semibold text-red-600 hover:text-red-700 transition">
-                        Selengkapnya
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-                    </a>
+                    <div class="flex flex-col gap-2">
+                        <a wire:navigate href="/fasilitas/ambulans" class="inline-flex items-center gap-1.5 text-sm font-semibold text-red-600 hover:text-red-700 transition">
+                            Selengkapnya
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+                        </a>
+                        <a wire:navigate href="{{ route('fasilitas.ambulans.jurnal') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-red-600 hover:text-red-700 transition">
+                            Lihat Jurnal Ambulans
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Facility 7 -->
