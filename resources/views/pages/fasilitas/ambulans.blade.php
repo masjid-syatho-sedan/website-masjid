@@ -25,12 +25,20 @@
                     <p class="text-lg text-red-100 mb-8 max-w-xl">
                         Masjid Syatho Sedan menyediakan layanan ambulans gratis untuk membantu warga yang membutuhkan pertolongan darurat. Siaga melayani umat kapan pun dibutuhkan.
                     </p>
-                    <a href="#hubungi" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-red-700 font-bold rounded-lg hover:bg-red-50 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                        </svg>
-                        Hubungi Sekarang
-                    </a>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#hubungi" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-red-700 font-bold rounded-lg hover:bg-red-50 transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            Hubungi Sekarang
+                        </a>
+                        <a href="{{ route('fasilitas.ambulans.jurnal') }}" class="inline-flex items-center gap-2 px-8 py-3 bg-red-900/40 text-white font-bold rounded-lg hover:bg-red-900/60 border border-red-400/40 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            Lihat Jurnal
+                        </a>
+                    </div>
                 </div>
 
                 {{-- Right Icon --}}

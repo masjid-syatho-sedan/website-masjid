@@ -69,6 +69,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Article::class);
     }
 
+    public function ambulanceJournals(): HasMany
+    {
+        return $this->hasMany(AmbulanceJournal::class);
+    }
+
     public function initials(): string
     {
         return Str::of($this->name)
