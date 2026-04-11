@@ -54,14 +54,35 @@ new #[Layout('layouts.base', ['active' => 'ambulans'])] class extends Component 
     <section class="py-10 bg-white min-h-screen">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            {{-- Back button --}}
-            <a
-                href="{{ route('fasilitas.ambulans.jurnal') }}"
-                class="inline-flex items-center gap-2 text-sm text-red-600 hover:text-red-800 font-semibold mb-8 transition"
-            >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                Kembali ke Jurnal
-            </a>
+            {{-- Back button + Copy link --}}
+            <div class="flex items-center justify-between mb-8">
+                <a
+                    href="{{ route('fasilitas.ambulans.jurnal') }}"
+                    class="inline-flex items-center gap-2 text-sm text-red-600 hover:text-red-800 font-semibold transition"
+                >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    Kembali ke Jurnal
+                </a>
+
+                <button
+                    x-data="{ copied: false }"
+                    x-on:click="navigator.clipboard.writeText(window.location.href).then(() => { copied = true; setTimeout(() => copied = false, 2000) })"
+                    class="inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg border transition"
+                    x-bind:class="copied ? 'border-green-300 bg-green-50 text-green-700' : 'border-gray-200 bg-white text-gray-600 hover:border-red-300 hover:text-red-700'"
+                >
+                    <template x-if="!copied">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                        </svg>
+                    </template>
+                    <template x-if="copied">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </template>
+                    <span x-text="copied ? 'Tersalin!' : 'Salin Link'"></span>
+                </button>
+            </div>
 
             <div class="space-y-8">
                 {{-- Description --}}
