@@ -102,30 +102,6 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
         ];
     }
 
-    public bool $showModal = false;
-    public ?string $activeJournalId = null;
-
-    public function openDetail(string $id): void
-    {
-        $this->activeJournalId = $id;
-        $this->showModal = true;
-    }
-
-    public function closeDetail(): void
-    {
-        $this->showModal = false;
-        $this->activeJournalId = null;
-    }
-
-    #[Computed]
-    public function activeJournal(): mixed
-    {
-        if (! $this->activeJournalId) {
-            return null;
-        }
-
-        return AmbulanceJournal::with('driver')->find($this->activeJournalId);
-    }
 }; ?>
 
 <div>
@@ -285,53 +261,18 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
                 @else
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach ($this->journals as $journal)
-                            <div
-                                wire:click="openDetail('{{ $journal->id }}')"
-                                class="group cursor-pointer bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-red-300 transition-all duration-200 overflow-hidden"
+                            <a
+                                href="{{ route('fasilitas.ambulans.jurnal.show', $journal->id) }}"
+                                class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-red-300 transition-all duration-200 overflow-hidden flex flex-col"
                             >
-                                {{-- Cover image --}}
-                                <div class="relative h-44 bg-gradient-to-br from-red-600 to-red-800 overflow-hidden">
-                                    @if ($journal->images && count($journal->images) > 0)
-                                        <img
-                                            src="{{ asset('storage/'.$journal->images[0]) }}"
-                                            alt="{{ $journal->title }}"
-                                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                                        >
-                                        @if (count($journal->images) > 1)
-                                            <div class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full font-medium">
-                                                +{{ count($journal->images) - 1 }} foto
-                                            </div>
-                                        @endif
-                                    @else
-                                        <div class="w-full h-full flex items-center justify-center opacity-40">
-                                            <svg class="w-14 h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                            </svg>
-                                        </div>
-                                    @endif
-
-                                    {{-- Date badge --}}
-                                    <div class="absolute top-3 left-3 bg-white/90 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full shadow">
-                                        {{ $journal->journal_date->translatedFormat('d M Y') }}
-                                    </div>
-
-                                    {{-- Video badge --}}
-                                    @if ($journal->videos && count($journal->videos) > 0)
-                                        <div class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow flex items-center gap-1">
-                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                            {{ count($journal->videos) }} video
-                                        </div>
-                                    @endif
-                                </div>
-
                                 {{-- Content --}}
-                                <div class="p-5">
-                                    {{-- Driver --}}
+                                <div class="p-5 flex flex-col flex-1">
+                                    {{-- Date --}}
                                     <div class="flex items-center gap-2 mb-3">
-                                        <div class="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
-                                            <span class="text-xs font-bold text-red-700">{{ $journal->driver?->initials() }}</span>
-                                        </div>
-                                        <span class="text-sm text-gray-600 font-medium">{{ $journal->driver?->name }}</span>
+                                        <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <span class="text-sm text-red-700 font-semibold">{{ $journal->journal_date->translatedFormat('d F Y') }}</span>
                                     </div>
 
                                     <h3 class="font-bold text-gray-900 text-base mb-2 line-clamp-2 group-hover:text-red-700 transition leading-snug">
@@ -342,25 +283,33 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
                                         <p class="text-sm text-gray-500 line-clamp-2 mb-3">{{ $journal->description }}</p>
                                     @endif
 
-                                    {{-- Tasks preview --}}
-                                    @if ($journal->tasks && count($journal->tasks) > 0)
-                                        <div class="flex items-center gap-1.5 text-xs text-gray-500 border-t border-gray-100 pt-3">
-                                            <svg class="w-3.5 h-3.5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-                                            </svg>
-                                            <span>{{ count($journal->tasks) }} tugas dilaksanakan</span>
-
-                                            @if ($journal->links && count($journal->links) > 0)
-                                                <span class="mx-1">·</span>
+                                    {{-- Meta --}}
+                                    <div class="flex items-center gap-3 text-xs text-gray-500 border-t border-gray-100 pt-3 mt-auto flex-wrap">
+                                        @if ($journal->tasks && count($journal->tasks) > 0)
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                                                </svg>
+                                                {{ count($journal->tasks) }} tugas
+                                            </span>
+                                        @endif
+                                        @if ($journal->videos && count($journal->videos) > 0)
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                                {{ count($journal->videos) }} video
+                                            </span>
+                                        @endif
+                                        @if ($journal->links && count($journal->links) > 0)
+                                            <span class="flex items-center gap-1">
                                                 <svg class="w-3.5 h-3.5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
                                                 </svg>
-                                                <span>{{ count($journal->links) }} link</span>
-                                            @endif
-                                        </div>
-                                    @endif
+                                                {{ count($journal->links) }} link
+                                            </span>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
 
@@ -375,127 +324,4 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
         </div>
     </section>
 
-    {{-- ====== DETAIL MODAL ====== --}}
-    @if ($showModal && $this->activeJournal)
-        <div
-            wire:click.self="closeDetail"
-            class="fixed inset-0 z-50 flex items-start justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto"
-        >
-            <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl my-8">
-                {{-- Close button --}}
-                <button
-                    wire:click="closeDetail"
-                    class="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition"
-                >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-
-                {{-- Header --}}
-                <div class="bg-gradient-to-r from-red-600 to-red-700 rounded-t-2xl p-6 text-white">
-                    <div class="flex items-center gap-2 text-red-200 text-sm mb-3">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20 8h-3V6c0-1.1-.9-2-2-2H9C7.9 4 7 4.9 7 6v2H4c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2z"/></svg>
-                        {{ $this->activeJournal->journal_date->translatedFormat('l, d F Y') }}
-                    </div>
-                    <h2 class="text-2xl font-bold leading-snug">{{ $this->activeJournal->title }}</h2>
-                    <div class="flex items-center gap-2 mt-3">
-                        <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
-                            <span class="text-xs font-bold">{{ $this->activeJournal->driver?->initials() }}</span>
-                        </div>
-                        <span class="text-sm text-red-100">Driver: {{ $this->activeJournal->driver?->name }}</span>
-                    </div>
-                </div>
-
-                <div class="p-6 space-y-6">
-                    {{-- Description --}}
-                    @if ($this->activeJournal->description)
-                        <div>
-                            <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wide mb-2">Deskripsi</h3>
-                            <p class="text-gray-700 leading-relaxed">{{ $this->activeJournal->description }}</p>
-                        </div>
-                    @endif
-
-                    {{-- Tasks --}}
-                    @if ($this->activeJournal->tasks && count($this->activeJournal->tasks) > 0)
-                        <div>
-                            <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Daftar Tugas</h3>
-                            <ul class="space-y-2">
-                                @foreach ($this->activeJournal->tasks as $task)
-                                    <li class="flex items-start gap-3">
-                                        <div class="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                            <svg class="w-3 h-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-                                        </div>
-                                        <span class="text-gray-700">{{ $task['task'] ?? $task }}</span>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    {{-- Images --}}
-                    @if ($this->activeJournal->images && count($this->activeJournal->images) > 0)
-                        <div>
-                            <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">
-                                Foto Dokumentasi ({{ count($this->activeJournal->images) }})
-                            </h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                @foreach ($this->activeJournal->images as $image)
-                                    <a href="{{ asset('storage/'.$image) }}" target="_blank" class="block rounded-lg overflow-hidden h-32 bg-gray-100 hover:opacity-90 transition">
-                                        <img src="{{ asset('storage/'.$image) }}" alt="Foto" class="w-full h-full object-cover">
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-
-                    {{-- Videos --}}
-                    @if ($this->activeJournal->videos && count($this->activeJournal->videos) > 0)
-                        <div>
-                            <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">
-                                Video Dokumentasi ({{ count($this->activeJournal->videos) }})
-                            </h3>
-                            <div class="space-y-3">
-                                @foreach ($this->activeJournal->videos as $video)
-                                    <video
-                                        controls
-                                        class="w-full rounded-xl bg-black max-h-64"
-                                        preload="metadata"
-                                    >
-                                        <source src="{{ asset('storage/'.$video) }}">
-                                        Browser Anda tidak mendukung pemutaran video.
-                                    </video>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-
-                    {{-- Links --}}
-                    @if ($this->activeJournal->links && count($this->activeJournal->links) > 0)
-                        <div>
-                            <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Tautan</h3>
-                            <div class="flex flex-col gap-2">
-                                @foreach ($this->activeJournal->links as $link)
-                                    <a
-                                        href="{{ $link['url'] }}"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="flex items-center gap-3 p-3 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition group"
-                                    >
-                                        <div class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                            </svg>
-                                        </div>
-                                        <span class="text-sm font-medium text-gray-700 group-hover:text-red-700 transition min-w-0 truncate">
-                                            {{ $link['label'] ?? $link['url'] }}
-                                        </span>
-                                        <svg class="w-4 h-4 text-gray-400 ml-auto flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    @endif
 </div>
