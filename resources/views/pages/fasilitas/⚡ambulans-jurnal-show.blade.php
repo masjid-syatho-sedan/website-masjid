@@ -46,7 +46,13 @@ new #[Layout('layouts.base', ['active' => 'ambulans'])] class extends Component 
                 <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20 8h-3V6c0-1.1-.9-2-2-2H9C7.9 4 7 4.9 7 6v2H4c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2z"/></svg>
                 {{ $journal->journal_date->translatedFormat('l, d F Y') }}
             </div>
-            <h1 class="text-3xl md:text-4xl font-bold text-white leading-snug">{{ $journal->title }}</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-white leading-snug mb-4">{{ $journal->title }}</h1>
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <span class="text-xs font-bold text-white">{{ $journal->driver?->initials() }}</span>
+                </div>
+                <span class="text-sm text-red-100">Driver: {{ $journal->driver?->name }}</span>
+            </div>
         </div>
     </section>
 
