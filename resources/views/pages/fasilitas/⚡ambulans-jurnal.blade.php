@@ -36,7 +36,6 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
 
     public function updatedTahun(): void
     {
-        $this->bulan = '';
         $this->resetPage();
     }
 
@@ -194,18 +193,16 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
                     @endforeach
                 </select>
 
-                {{-- Month Filter (only when year selected) --}}
-                @if ($tahun)
-                    <select
-                        wire:model.live="bulan"
-                        class="text-sm rounded-lg border border-red-200 bg-red-50 text-red-800 px-3 py-2 focus:outline-none focus:border-red-400 focus:bg-white transition"
-                    >
-                        <option value="">Semua Bulan</option>
-                        @foreach ($this->availableMonths as $num => $name)
-                            <option value="{{ $num }}">{{ $name }}</option>
-                        @endforeach
-                    </select>
-                @endif
+                {{-- Month Filter --}}
+                <select
+                    wire:model.live="bulan"
+                    class="text-sm rounded-lg border border-red-200 bg-red-50 text-red-800 px-3 py-2 focus:outline-none focus:border-red-400 focus:bg-white transition"
+                >
+                    <option value="">Semua Bulan</option>
+                    @foreach ($this->availableMonths as $num => $name)
+                        <option value="{{ $num }}">{{ $name }}</option>
+                    @endforeach
+                </select>
 
                 {{-- Reset --}}
                 @if ($cari || $driverId || $tahun || $bulan)
