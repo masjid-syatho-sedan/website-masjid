@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class AmbulanceJournal extends Model
 {
@@ -38,6 +39,30 @@ class AmbulanceJournal extends Model
     public function driver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    protected static function booted(): void
+    {
+        // Hapus file yang dihapus dari form saat edit
+        static::saving(function (AmbulanceJournal $journal) {
+            foreach (['images', 'videos'] as $field) {
+                $old = $journal->getOriginal($field) ?? [];
+                $new = $journal->$field ?? [];
+                $removed = array_diff($old, $new);
+                foreach ($removed as $file) {
+                    Storage::disk('public')->delete($file);
+                }
+            }
+        });
+
+        // Hapus semua file saat record dihapus
+        static::deleting(function (AmbulanceJournal $journal) {
+            foreach (['images', 'videos'] as $field) {
+                foreach ($journal->$field ?? [] as $file) {
+                    Storage::disk('public')->delete($file);
+                }
+            }
+        });
     }
 
     public function scopePublished(Builder $query): Builder
