@@ -10,6 +10,9 @@ Route::view('/fasilitas/ambulans', 'pages.fasilitas.ambulans')->name('fasilitas.
 Route::livewire('/fasilitas/ambulans/jurnal', 'pages::fasilitas.ambulans-jurnal')->name('fasilitas.ambulans.jurnal');
 Route::livewire('/fasilitas/ambulans/jurnal/{id}', 'pages::fasilitas.ambulans-jurnal-show')->name('fasilitas.ambulans.jurnal.show');
 
+Route::livewire('/jurnal', 'pages::jurnal.index')->name('jurnal.index');
+Route::livewire('/jurnal/{id}', 'pages::jurnal.show')->name('jurnal.show');
+
 Route::redirect('/blog', '/artikel');
 Route::livewire('/artikel', 'pages::artikel.index')->name('blog');
 Route::livewire('/artikel/{slug}', 'pages::artikel.detail')->name('artikel.show');
