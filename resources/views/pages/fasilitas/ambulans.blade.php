@@ -174,8 +174,10 @@
                     </h3>
                     <div class="space-y-4">
                         @foreach([
-                            ['label' => 'Jenis Kendaraan', 'value' => 'Ambulans Minibus'],
-                            ['label' => 'Kapasitas Pasien', 'value' => '1–2 pasien (berbaring)'],
+                            ['label' => 'Jenis Kendaraan', 'value' => 'Nissan Evalia 2017'],
+                            ['label' => 'Kapasitas Pasien', 'value' => '1 orang pasien'],
+                            ['label' => 'Kursi Belakang', 'value' => '2 orang'],
+                            ['label' => 'Kursi Depan', 'value' => '1 orang'],
                             ['label' => 'Wilayah Layanan', 'value' => 'Kecamatan Sedan & sekitarnya'],
                             ['label' => 'Status Layanan', 'value' => 'Gratis untuk warga sekitar'],
                             ['label' => 'Jam Operasional', 'value' => '24 Jam (on-call)'],
@@ -200,14 +202,13 @@
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         @foreach([
-                            'Tandu & brankar pasien',
-                            'Tabung oksigen portabel',
-                            'Peralatan pertolongan pertama (P3K)',
-                            'Tensimeter & stetoskop',
-                            'Infus set & cairan IV',
-                            'Selimut medis & bantal',
-                            'Alat penjepit (bidai) tulang',
-                            'Lampu darurat & sirine',
+                            'Tabung oksigen',
+                            'Selang',
+                            'P3K',
+                            'Selimut',
+                            'Bantal',
+                            'Plastik',
+                            'APAR mini',
                         ] as $item)
                         <div class="flex items-center gap-3 p-3 bg-white rounded-lg border border-amber-100">
                             <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -300,13 +301,13 @@
                         <div class="flex-1 hidden md:block"></div>
                     </div>
 
-                    {{-- Item 2: Penggalangan Dana --}}
+                    {{-- Item 2: Hibah Ambulans --}}
                     <div class="relative flex flex-col md:flex-row items-center gap-8">
                         <div class="flex-1 hidden md:block"></div>
                         {{-- Titik tengah --}}
                         <div class="hidden md:flex w-10 h-10 bg-amber-600 rounded-full items-center justify-center shadow-lg flex-shrink-0 z-10">
                             <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                                <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/>
                             </svg>
                         </div>
                         <div class="flex-1 md:pl-12">
@@ -314,11 +315,11 @@
                                 <span class="inline-block bg-blue-200 text-blue-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
                                     [TAHUN — PLACEHOLDER]
                                 </span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Penggalangan Dana & Dukungan</h3>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Hibah Ambulans</h3>
                                 <p class="text-gray-600 text-sm leading-relaxed">
-                                    <em class="text-blue-600">[Placeholder — ceritakan proses penggalangan dana dari jamaah, donatur, atau lembaga. Siapa saja yang
-                                    berkontribusi, berapa lama proses berlangsung, dan bagaimana antusiasme masyarakat dalam mendukung
-                                    pengadaan ambulans ini.]</em>
+                                    <em class="text-blue-600">[Placeholder — ceritakan proses penerimaan hibah ambulans ini. Siapa pemberi hibah, latar belakang
+                                    kedermawanan tersebut, serta bagaimana proses serah terima berlangsung hingga ambulans resmi
+                                    menjadi milik Masjid Syatho untuk melayani masyarakat.]</em>
                                 </p>
                             </div>
                         </div>

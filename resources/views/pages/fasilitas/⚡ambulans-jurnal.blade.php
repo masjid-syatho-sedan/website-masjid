@@ -9,7 +9,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', ['active' => 'ambulans'])] class extends Component {
+new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', ['active' => 'ambulans', 'whatsappPhone' => '6282147977779', 'whatsappLabel' => 'Hubungi Ambulans'])] class extends Component {
     use WithPagination;
 
     #[Url(as: 'cari', except: '')]
