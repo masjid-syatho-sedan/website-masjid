@@ -25,36 +25,13 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
     @endpush
 
     {{-- ====== HERO ====== --}}
-    <section class="relative bg-gradient-to-br from-red-700 via-red-600 to-red-800 overflow-hidden py-14 md:py-18">
+    <section class="relative bg-gradient-to-br from-red-700 via-red-600 to-red-800 overflow-hidden py-12 md:py-16">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -mr-48 -mt-48"></div>
             <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full -ml-48 -mb-48"></div>
         </div>
         <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Breadcrumb --}}
-            <nav class="flex items-center gap-2 text-sm text-red-200 mb-6 flex-wrap">
-                <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                <a href="{{ route('fasilitas') }}" class="hover:text-white transition">Fasilitas</a>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                <a href="{{ route('fasilitas.ambulans') }}" class="hover:text-white transition">Ambulans</a>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                <a href="{{ route('fasilitas.ambulans.jurnal') }}" class="hover:text-white transition">Jurnal</a>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                <span class="text-white font-semibold truncate max-w-xs">{{ $journal->title }}</span>
-            </nav>
-
-            <div class="flex items-center gap-3 text-red-200 text-sm mb-4">
-                <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20 8h-3V6c0-1.1-.9-2-2-2H9C7.9 4 7 4.9 7 6v2H4c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2z"/></svg>
-                {{ $journal->journal_date->translatedFormat('l, d F Y') }}
-            </div>
-            <h1 class="text-3xl md:text-4xl font-bold text-white leading-snug mb-4">{{ $journal->title }}</h1>
-            <div class="flex items-center gap-2">
-                <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <span class="text-xs font-bold text-white">{{ $journal->driver?->initials() }}</span>
-                </div>
-                <span class="text-sm text-red-100">Driver: {{ $journal->driver?->name }}</span>
-            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-white leading-snug">{{ $journal->title }}</h1>
         </div>
     </section>
 
@@ -63,7 +40,7 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {{-- Back button + Copy link --}}
-            <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center justify-between mb-4">
                 <a
                     href="{{ route('fasilitas.ambulans.jurnal') }}"
                     class="inline-flex items-center gap-2 text-sm text-red-600 hover:text-red-800 font-semibold transition"
@@ -90,6 +67,21 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
                     </template>
                     <span x-text="copied ? 'Tersalin!' : 'Salin Link'"></span>
                 </button>
+            </div>
+
+            {{-- Meta: tanggal & driver --}}
+            <div class="flex items-center gap-4 text-sm text-gray-500 mb-8 flex-wrap">
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    {{ $journal->journal_date->translatedFormat('l, d F Y') }}
+                </span>
+                @if ($journal->driver)
+                    <span class="text-gray-300">|</span>
+                    <span class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-red-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+                        Driver: {{ $journal->driver->name }}
+                    </span>
+                @endif
             </div>
 
             <div class="space-y-8">
