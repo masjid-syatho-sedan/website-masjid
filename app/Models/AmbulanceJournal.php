@@ -69,4 +69,23 @@ class AmbulanceJournal extends Model
     {
         return $query->where('status', 'published');
     }
+
+    // Karakter yang dipakai untuk ID pendek — hindari 0/O dan 1/I/L yang mirip
+    private const SHORT_ID_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+    public function newUniqueId(): string
+    {
+        return self::generateShortId();
+    }
+
+    public static function generateShortId(): string
+    {
+        $chars = self::SHORT_ID_CHARS;
+        $result = '';
+        for ($i = 0; $i < 5; $i++) {
+            $result .= $chars[random_int(0, strlen($chars) - 1)];
+        }
+
+        return $result;
+    }
 }
