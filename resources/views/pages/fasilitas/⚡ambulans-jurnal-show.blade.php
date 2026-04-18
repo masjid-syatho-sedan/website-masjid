@@ -24,23 +24,12 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
         <meta property="og:type" content="article" />
     @endpush
 
-    {{-- ====== HERO ====== --}}
-    <section class="relative bg-gradient-to-br from-red-700 via-red-600 to-red-800 overflow-hidden py-12 md:py-16">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -mr-48 -mt-48"></div>
-            <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full -ml-48 -mb-48"></div>
-        </div>
-        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-white leading-snug">{{ $journal->title }}</h1>
-        </div>
-    </section>
-
     {{-- ====== CONTENT ====== --}}
     <section class="py-10 bg-white min-h-screen">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {{-- Back button + Copy link --}}
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center justify-between mb-6">
                 <a
                     href="{{ route('fasilitas.ambulans.jurnal') }}"
                     class="inline-flex items-center gap-2 text-sm text-red-600 hover:text-red-800 font-semibold transition"
@@ -69,8 +58,11 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
                 </button>
             </div>
 
+            {{-- Judul --}}
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-snug mb-3">{{ $journal->title }}</h1>
+
             {{-- Meta: tanggal & driver --}}
-            <div class="flex items-center gap-4 text-sm text-gray-500 mb-8 flex-wrap">
+            <div class="flex items-center gap-4 text-sm text-gray-500 mb-10 flex-wrap">
                 <span class="flex items-center gap-1.5">
                     <svg class="w-4 h-4 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                     {{ $journal->journal_date->translatedFormat('l, d F Y') }}
