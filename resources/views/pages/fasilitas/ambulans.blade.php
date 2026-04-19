@@ -258,156 +258,33 @@
     </section>
 
     {{-- =========================================================== --}}
-    {{-- SECTION 3: Sejarah Ambulans (Placeholder) --}}
+    {{-- SECTION 3: Hibah dan Peresmian --}}
     {{-- =========================================================== --}}
     <section id="sejarah" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14">
                 <span class="inline-block bg-amber-100 text-amber-700 font-semibold text-sm px-4 py-1 rounded-full mb-4">Latar Belakang</span>
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Sejarah Ambulans Masjid Syatho</h2>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Hibah dan Peresmian</h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Perjalanan panjang hadirnya ambulans sebagai wujud kepedulian dan pengabdian Masjid Syatho kepada masyarakat sekitar.
+                    Momen bersejarah hadirnya ambulans sebagai wujud kepedulian dan pengabdian kepada masyarakat sekitar Masjid Syatho.
                 </p>
             </div>
 
-            {{-- Timeline --}}
-            <div class="relative">
-                {{-- Garis tengah timeline (desktop) --}}
-                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-amber-200 -translate-x-1/2"></div>
-
-                <div class="space-y-12">
-
-                    {{-- Item 1: Awal Mula Gagasan --}}
-                    <div class="relative flex flex-col md:flex-row items-center gap-8">
-                        <div class="flex-1 md:text-right md:pr-12">
-                            <div class="inline-block bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 hover:shadow-md transition text-left md:text-right">
-                                <span class="inline-block bg-amber-200 text-amber-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
-                                    [TAHUN — PLACEHOLDER]
-                                </span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Awal Mula Gagasan</h3>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    <em class="text-amber-600">[Placeholder — isi dengan cerita awal mula ide pengadaan ambulans, misalnya: kondisi warga yang kesulitan
-                                    transportasi ke rumah sakit, kejadian yang menjadi pemicu, atau inisiatif dari pengurus masjid
-                                    dan tokoh masyarakat setempat.]</em>
-                                </p>
-                            </div>
-                        </div>
-                        {{-- Titik tengah --}}
-                        <div class="hidden md:flex w-10 h-10 bg-amber-600 rounded-full items-center justify-center shadow-lg flex-shrink-0 z-10">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                            </svg>
-                        </div>
-                        <div class="flex-1 hidden md:block"></div>
-                    </div>
-
-                    {{-- Item 2: Hibah Ambulans --}}
-                    <div class="relative flex flex-col md:flex-row items-center gap-8">
-                        <div class="flex-1 hidden md:block"></div>
-                        {{-- Titik tengah --}}
-                        <div class="hidden md:flex w-10 h-10 bg-amber-600 rounded-full items-center justify-center shadow-lg flex-shrink-0 z-10">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8 hover:shadow-md transition">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 bg-amber-600 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/>
                             </svg>
                         </div>
-                        <div class="flex-1 md:pl-12">
-                            <div class="inline-block bg-blue-50 border-2 border-blue-200 rounded-2xl p-6 hover:shadow-md transition">
-                                <span class="inline-block bg-blue-200 text-blue-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
-                                    [TAHUN — PLACEHOLDER]
-                                </span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Hibah Ambulans</h3>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    <em class="text-blue-600">[Placeholder — ceritakan proses penerimaan hibah ambulans ini. Siapa pemberi hibah, latar belakang
-                                    kedermawanan tersebut, serta bagaimana proses serah terima berlangsung hingga ambulans resmi
-                                    menjadi milik Masjid Syatho untuk melayani masyarakat.]</em>
-                                </p>
-                            </div>
-                        </div>
+                        <span class="inline-block bg-amber-200 text-amber-800 text-sm font-bold px-4 py-1.5 rounded-full">
+                            7 Februari 2026
+                        </span>
                     </div>
-
-                    {{-- Item 3: Pengadaan Kendaraan --}}
-                    <div class="relative flex flex-col md:flex-row items-center gap-8">
-                        <div class="flex-1 md:text-right md:pr-12">
-                            <div class="inline-block bg-green-50 border-2 border-green-200 rounded-2xl p-6 hover:shadow-md transition text-left md:text-right">
-                                <span class="inline-block bg-green-200 text-green-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
-                                    [TAHUN — PLACEHOLDER]
-                                </span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Pengadaan Kendaraan</h3>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    <em class="text-green-600">[Placeholder — uraikan proses pembelian atau perolehan kendaraan ambulans. Dari mana kendaraan
-                                    berasal, apakah hibah, pembelian, atau hasil lelang. Modifikasi apa saja yang dilakukan agar
-                                    sesuai standar ambulans.]</em>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="hidden md:flex w-10 h-10 bg-green-600 rounded-full items-center justify-center shadow-lg flex-shrink-0 z-10">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/>
-                            </svg>
-                        </div>
-                        <div class="flex-1 hidden md:block"></div>
-                    </div>
-
-                    {{-- Item 4: Proses Penyerahan --}}
-                    <div class="relative flex flex-col md:flex-row items-center gap-8">
-                        <div class="flex-1 hidden md:block"></div>
-                        <div class="hidden md:flex w-10 h-10 bg-red-600 rounded-full items-center justify-center shadow-lg flex-shrink-0 z-10">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20 8h-3V6c0-1.1-.9-2-2-2H9C7.9 4 7 4.9 7 6v2H4c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2zm-5 9h-2v-2h-2v2H9v-2H7v-2h2v-2h2v2h2v-2h2v2h2v2h-2v2zm0-11H9V6h6v2z"/>
-                            </svg>
-                        </div>
-                        <div class="flex-1 md:pl-12">
-                            <div class="inline-block bg-red-50 border-2 border-red-200 rounded-2xl p-6 hover:shadow-md transition">
-                                <span class="inline-block bg-red-200 text-red-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
-                                    [TANGGAL — PLACEHOLDER]
-                                </span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Seremoni Penyerahan Ambulans</h3>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    <em class="text-red-600">[Placeholder — ceritakan momen penyerahan resmi ambulans kepada masjid. Siapa yang menyerahkan
-                                    (donatur utama, pemerintah, atau lembaga lain), siapa yang menerima dari pihak masjid,
-                                    acara apa yang diselenggarakan, serta doa dan harapan yang menyertai penyerahan tersebut.]</em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Item 5: Mulai Beroperasi --}}
-                    <div class="relative flex flex-col md:flex-row items-center gap-8">
-                        <div class="flex-1 md:text-right md:pr-12">
-                            <div class="inline-block bg-purple-50 border-2 border-purple-200 rounded-2xl p-6 hover:shadow-md transition text-left md:text-right">
-                                <span class="inline-block bg-purple-200 text-purple-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
-                                    [TANGGAL — PLACEHOLDER]
-                                </span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Mulai Beroperasi Aktif</h3>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    <em class="text-purple-600">[Placeholder — kisahkan awal ambulans mulai aktif beroperasi melayani masyarakat. Berapa warga
-                                    yang telah dibantu, testimoni awal dari penerima manfaat, serta komitmen pengurus masjid
-                                    dalam menjaga keberlangsungan layanan ini.]</em>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="hidden md:flex w-10 h-10 bg-purple-600 rounded-full items-center justify-center shadow-lg flex-shrink-0 z-10">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                            </svg>
-                        </div>
-                        <div class="flex-1 hidden md:block"></div>
-                    </div>
-
-                </div>
-            </div>
-
-            {{-- Catatan Editor --}}
-            <div class="mt-16 p-6 bg-yellow-50 border-2 border-yellow-300 rounded-2xl flex gap-4">
-                <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                </svg>
-                <div>
-                    <p class="font-bold text-yellow-800 mb-1">Catatan untuk Editor</p>
-                    <p class="text-sm text-yellow-700">
-                        Bagian sejarah di atas masih berupa <strong>placeholder</strong>. Mohon diisi dengan narasi sejarah nyata
-                        ambulans Masjid Syatho — termasuk tahun kejadian, nama tokoh yang terlibat, dan foto dokumentasi
-                        jika tersedia. Hubungi pengurus masjid untuk mendapatkan informasi yang akurat.
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Hibah dan Peresmian Ambulans</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Pada tanggal 7 Februari 2026, ambulans Masjid Syatho secara resmi diterima melalui proses hibah dan diresmikan untuk melayani masyarakat. Momen bersejarah ini menandai hadirnya fasilitas ambulans gratis bagi warga sekitar Kecamatan Sedan dan sekitarnya.
                     </p>
                 </div>
             </div>

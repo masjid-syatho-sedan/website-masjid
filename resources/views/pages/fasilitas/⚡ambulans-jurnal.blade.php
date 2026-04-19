@@ -150,7 +150,7 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
     </section>
 
     {{-- ====== FILTER BAR ====== --}}
-    <section class="sticky top-0 z-20 bg-white border-b border-red-100 shadow-sm py-3">
+    <section class="bg-white border-b border-red-100 shadow-sm py-3">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 {{-- Search --}}
