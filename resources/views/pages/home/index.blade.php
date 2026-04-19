@@ -21,10 +21,7 @@
                         Melayani umat dengan sepenuh hati. Tempat beribadah yang nyaman, aman, dan dilengkapi fasilitas modern.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="{{ route('dashboard') }}" class="px-8 py-3 bg-white text-amber-700 font-bold rounded-lg hover:bg-amber-50 transition">
-                            Portal Masjid
-                        </a>
-                        <a href="#fasilitas" class="px-8 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-700 transition border-2 border-white">
+<a href="#fasilitas" class="px-8 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-700 transition border-2 border-white">
                             Lihat Fasilitas
                         </a>
                         <a wire:navigate href="/fasilitas/ambulans" class="px-8 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition flex items-center gap-2">
