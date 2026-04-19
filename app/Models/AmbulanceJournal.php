@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class AmbulanceJournal extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
 
     protected $fillable = [
         'user_id',
@@ -43,6 +46,12 @@ class AmbulanceJournal extends Model
 
     protected static function booted(): void
     {
+        static::creating(function (AmbulanceJournal $journal) {
+            if (empty($journal->{$journal->getKeyName()})) {
+                $journal->{$journal->getKeyName()} = self::generateShortId();
+            }
+        });
+
         // Hapus file yang dihapus dari form saat edit
         static::saving(function (AmbulanceJournal $journal) {
             foreach (['images', 'videos'] as $field) {
@@ -72,11 +81,6 @@ class AmbulanceJournal extends Model
 
     // Karakter yang dipakai untuk ID pendek — hindari 0/O dan 1/I/L yang mirip
     private const SHORT_ID_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-
-    public function newUniqueId(): string
-    {
-        return self::generateShortId();
-    }
 
     public static function generateShortId(): string
     {
