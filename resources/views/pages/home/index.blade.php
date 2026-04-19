@@ -20,12 +20,16 @@
                     <p class="text-xl text-amber-100 mb-8 max-w-xl">
                         Melayani umat dengan sepenuh hati. Tempat beribadah yang nyaman, aman, dan dilengkapi fasilitas modern.
                     </p>
-                    <div class="flex gap-4">
+                    <div class="flex flex-wrap gap-4">
                         <a href="{{ route('dashboard') }}" class="px-8 py-3 bg-white text-amber-700 font-bold rounded-lg hover:bg-amber-50 transition">
                             Portal Masjid
                         </a>
                         <a href="#fasilitas" class="px-8 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-700 transition border-2 border-white">
                             Lihat Fasilitas
+                        </a>
+                        <a wire:navigate href="/fasilitas/ambulans" class="px-8 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                            Fasilitas Ambulans
                         </a>
                     </div>
                 </div>
