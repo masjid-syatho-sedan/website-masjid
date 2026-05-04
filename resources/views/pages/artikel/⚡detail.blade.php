@@ -104,8 +104,17 @@ new #[Layout('layouts.base', ['active' => 'artikel'])] class extends Component {
                 @endif
 
                 {{-- Article content --}}
-                <div class="prose prose-amber max-w-none text-amber-900 leading-relaxed
-                            prose-headings:text-amber-900 prose-a:text-amber-700 prose-strong:text-amber-900">
+                <div class="prose prose-lg prose-amber max-w-none
+                            prose-headings:text-amber-900 prose-headings:font-bold
+                            prose-p:text-amber-950 prose-p:leading-relaxed
+                            prose-a:text-amber-700 prose-a:font-medium hover:prose-a:text-amber-900
+                            prose-strong:text-amber-900
+                            prose-blockquote:border-amber-400 prose-blockquote:bg-amber-50 prose-blockquote:rounded-r-xl prose-blockquote:py-1
+                            prose-code:text-amber-800 prose-code:bg-amber-50 prose-code:rounded prose-code:px-1
+                            prose-pre:bg-amber-950 prose-pre:text-amber-100
+                            prose-img:rounded-xl prose-img:shadow-md
+                            prose-hr:border-amber-200
+                            prose-li:text-amber-950">
                     {!! $article->content !!}
                 </div>
 
@@ -136,20 +145,6 @@ new #[Layout('layouts.base', ['active' => 'artikel'])] class extends Component {
 
             {{-- Sidebar --}}
             <aside class="lg:col-span-1 space-y-8">
-                {{-- Info penulis --}}
-                <div class="p-5 rounded-2xl bg-amber-50 border border-amber-200">
-                    <h3 class="font-bold text-amber-900 mb-3 text-sm uppercase tracking-wide">Tentang Penulis</h3>
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full bg-amber-700 flex items-center justify-center text-white font-bold text-lg">
-                            {{ $article->user->initials() }}
-                        </div>
-                        <div>
-                            <p class="font-bold text-amber-900">{{ $article->user->name }}</p>
-                            <p class="text-sm text-amber-600">Pengelola Konten</p>
-                        </div>
-                    </div>
-                </div>
-
                 {{-- Related articles --}}
                 @if ($this->relatedArticles->isNotEmpty())
                     <div class="p-5 rounded-2xl bg-white border border-amber-200">
