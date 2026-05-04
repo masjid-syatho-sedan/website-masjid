@@ -12,6 +12,16 @@
             <div class="flex flex-col md:flex-row items-center gap-12 w-full">
                 <!-- Left Content -->
                 <div class="flex-1 text-white">
+                    <!-- Info Qurban 1447 H -->
+                    <div class="mb-6 p-4 bg-green-700/80 border-2 border-yellow-300 rounded-xl shadow-lg">
+                        <p class="font-extrabold text-yellow-300 text-xl mb-2">🐄 Ayo Qurban 1447 Hijriyah!</p>
+                        <div class="space-y-1 text-white font-medium">
+                            <p>Ali Imron : <a href="https://wa.me/6285326326915" target="_blank" class="font-bold text-yellow-200 hover:text-yellow-100 transition">085 326 326 915</a></p>
+                            <p>Ahmadi &nbsp;&nbsp;&nbsp;: <a href="https://wa.me/6282324384149" target="_blank" class="font-bold text-yellow-200 hover:text-yellow-100 transition">082 324 384 149</a></p>
+                            <p>H Ni'am &nbsp;: <a href="https://wa.me/6281273567984" target="_blank" class="font-bold text-yellow-200 hover:text-yellow-100 transition">081 273 567 984</a></p>
+                        </div>
+                    </div>
+
                     <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
                         Masjid Syatho
                         <br>
