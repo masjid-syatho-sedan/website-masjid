@@ -237,11 +237,7 @@ px-6 py-7 md:px-11 md:py-10 shadow-[0_8px_40px_rgba(120,53,15,0.3)]">
 
 
         {{-- INFO --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-
-            <livewire:waktu-sholat />
-
-
+        <div class="grid grid-cols-1 gap-4 mb-6">
 
             <div class="bg-white border border-amber-200 rounded-2xl p-6 shadow-sm">
 
