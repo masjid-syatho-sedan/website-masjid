@@ -22,6 +22,11 @@ new #[Title('Jurnal Ambulans - Masjid Syatho Sedan')] #[Layout('layouts.base', [
         <meta property="og:description" content="{{ $journal->description ? Str::limit($journal->description, 160) : 'Jurnal perjalanan ambulans Masjid Syatho Sedan, '.$journal->journal_date->translatedFormat('d F Y') }}" />
         <meta property="og:url" content="{{ route('fasilitas.ambulans.jurnal.show', $journal->id) }}" />
         <meta property="og:type" content="article" />
+        @if ($journal->images && count($journal->images) > 0)
+            <meta property="og:image" content="{{ asset('storage/'.$journal->images[0]) }}" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+        @endif
     @endpush
 
     {{-- ====== CONTENT ====== --}}
