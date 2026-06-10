@@ -64,7 +64,7 @@
                         <svg class="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L9.9 13.95a.75.75 0 01-1.06-1.06l5.05-5.05a5.5 5.5 0 10-7.78 7.78L8.55 18.6a2.5 2.5 0 01-3.54-3.54l4.24-4.24a.75.75 0 11 1.06 1.06L4.3 16.68a.75.75 0 101.06 1.06l4.24-4.24a3.75 3.75 0 10-5.3-5.3L2.05 9.05a.75.75 0 01-1.06-1.06L4.05 4.05z" clip-rule="evenodd"/></svg>
                         <div>
                             <p class="font-semibold text-amber-50">Alamat</p>
-                            <p>Sedan, Rembang, Jawa Tengah</p>
+                            <p>Utara Pasar Kecamatan Sedan, Kabupaten Rembang, Jawa Tengah 59264, Indonesia</p>
                         </div>
                     </div>
                     <div class="flex gap-3">
